@@ -6,6 +6,8 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Cohort Participants
 
+- [Daniel Hong](https://github.com/daniel-sj-hong) 🤯
+
 ## Mentors
 
 ## Code of Conduct Contacts
