@@ -11,5 +11,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Mentors
 
 - [EJ Mason](https://github.com/mxmason) 🐧
+- [Ryan Lynch](https://github.com/shiftyp)
 
 ## Code of Conduct Contacts
