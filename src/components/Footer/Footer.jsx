@@ -4,13 +4,13 @@ import './Footer.css';
 export default function Footer() {
   return (
     <div className="footer">
-      <NavLink to="/" activeClassName="active">
+      <NavLink to="/" activeClassName="active" className="navLinks">
         Home
       </NavLink>
-      <NavLink to="/list" activeClassName="active">
+      <NavLink to="/list" activeClassName="active" className="navLinks">
         List
       </NavLink>
-      <NavLink to="/additem" activeClassName="active">
+      <NavLink to="/additem" activeClassName="active" className="navLinks">
         Add Item
       </NavLink>
     </div>
