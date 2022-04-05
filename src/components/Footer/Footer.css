@@ -1,0 +1,10 @@
+.active {
+  font-weight: 800;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 6em;
+}
