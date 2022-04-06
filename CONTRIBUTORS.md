@@ -8,6 +8,8 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Daniel Hong](https://github.com/daniel-sj-hong) 🤯
 - [Katie Schrattenholzer](https://github.com/k-schrattenholzer) 🔮
+- [Natasha Johnson](https://github.com/artsycoder533) 🎵
+- [Sonja Parsell](https://github.com/sparsell) 🤷‍♀️
 
 ## Mentors
 
