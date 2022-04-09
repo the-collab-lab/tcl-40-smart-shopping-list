@@ -6,6 +6,7 @@
     "@the-collab-lab/shopping-list-utils": "^1.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.1"
   },
   "devDependencies": {
