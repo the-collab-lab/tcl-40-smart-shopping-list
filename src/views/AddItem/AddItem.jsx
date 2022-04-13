@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { userToken } from '../../utils/localStorage';
 
 export default function AddItem() {
   const [listItem, setListItem] = useState({
@@ -8,6 +9,11 @@ export default function AddItem() {
     frequency: '7',
     date: '',
   });
+
+  useEffect(() => {
+    const dummyVariable = 'KN';
+    localStorage.setItem('item', JSON.stringify(dummyVariable));
+  }, []);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -25,7 +31,7 @@ export default function AddItem() {
 
   const addItem = async () => {
     try {
-      const docRef = await addDoc(collection(db, 'list'), {
+      const docRef = await addDoc(collection(db, userToken), {
         property: listItem,
       });
     } catch (e) {
@@ -37,10 +43,9 @@ export default function AddItem() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="itemName">Item Name</label>
+      <label htmlFor="name">Item Name</label>
       <input
         type="text"
-        htmlFor="name"
         id="name"
         onChange={handleInput}
         value={name}
@@ -76,7 +81,7 @@ export default function AddItem() {
           onChange={handleInput}
         />
       </fieldset>
-      <label htmlFor="30" id="lastPurchase">
+      <label htmlFor="lastPurchase" id="lastPurchase">
         Date of Last Purchase
       </label>
       <input
