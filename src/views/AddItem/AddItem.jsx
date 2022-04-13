@@ -10,6 +10,7 @@ export default function AddItem() {
     date: '',
   });
 
+  //this useEffect will be removed when we merge our branches together because we no longer have to create a dummy variable, we will stricly grab the user token from local storage
   useEffect(() => {
     const dummyVariable = 'KN';
     localStorage.setItem('item', JSON.stringify(dummyVariable));
@@ -81,9 +82,7 @@ export default function AddItem() {
           onChange={handleInput}
         />
       </fieldset>
-      <label htmlFor="lastPurchase" id="lastPurchase">
-        Date of Last Purchase
-      </label>
+      <label htmlFor="lastPurchase">Date of Last Purchase</label>
       <input
         type="date"
         id="lastPurchase"
