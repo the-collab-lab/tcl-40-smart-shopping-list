@@ -3,20 +3,30 @@ import { getToken, words } from '@the-collab-lab/shopping-list-utils';
 
 const Home = () => {
   // if user does not have a token in localStorage
+  // const [token, setToken] = useState(localStorage.getItem('token'));
 
-  const checkLocalStorage = () => {
-    localStorage.getItem(); //insert name of property you set the token to
-  };
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log('token: ', token);
+    // if (!token) {
+    //   setToken(localStorage.setItem('token', getToken()))
+    // }
+  }, []);
+
+  // const checkLocalStorage = () => {
+  //   localStorage.getItem(); //insert name of property you set the token to
+  // };
 
   // show button/link on home screen to "create a new list"
 
   // onClick generates a new token and saves to localStorage
 
-  const handleCreateToken = (e) => {};
-
-  const saveToLocalStorage = () => {
-    localStorage.setItem();
+  const handleCreateToken = () => {
+    localStorage.setItem('token', getToken());
   };
+
+  // const saveToLocalStorage = () => {
+  // };
 
   // render "List" view
 
