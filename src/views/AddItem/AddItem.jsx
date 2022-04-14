@@ -32,7 +32,7 @@ export default function AddItem() {
 
   const addItem = async () => {
     try {
-      const docRef = await addDoc(collection(db, userToken), {
+      await addDoc(collection(db, userToken), {
         property: listItem,
       });
     } catch (e) {
