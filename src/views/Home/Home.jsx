@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { getToken, words } from '@the-collab-lab/shopping-list-utils';
+import { getToken } from '@the-collab-lab/shopping-list-utils';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 
-const Home = (props) => {
+const Home = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [hasToken, setHasToken] = useState(token !== null);
+  console.log('token:', token);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -16,6 +17,7 @@ const Home = (props) => {
   const handleCreateToken = () => {
     setToken(localStorage.setItem('token', getToken()));
     console.log('token:', token);
+    // need to redirect to '/list' page on click of button
   };
 
   const savedToken = localStorage.getItem('token');
@@ -23,7 +25,7 @@ const Home = (props) => {
   return (
     <div>
       {!hasToken ? (
-        <CreateList newToken={props.handleCreateToken} />
+        <CreateList newToken={handleCreateToken} />
       ) : (
         <JoinList token={savedToken} />
       )}
