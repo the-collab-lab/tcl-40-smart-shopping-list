@@ -14,7 +14,6 @@ const Home = () => {
 
   const handleCreateToken = () => {
     setToken(localStorage.setItem('token', getToken()));
-    // need to redirect to '/list' page on click of button
   };
 
   const savedToken = localStorage.getItem('token');
