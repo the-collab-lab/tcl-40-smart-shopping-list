@@ -6,17 +6,14 @@ import JoinList from '../../components/Home/JoinList';
 const Home = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [hasToken, setHasToken] = useState(token !== null);
-  console.log('token:', token);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log('token: ', token);
     setHasToken(token !== null);
   }, []);
 
   const handleCreateToken = () => {
     setToken(localStorage.setItem('token', getToken()));
-    console.log('token:', token);
     // need to redirect to '/list' page on click of button
   };
 
