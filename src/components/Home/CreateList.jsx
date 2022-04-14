@@ -6,9 +6,8 @@ const CreateList = (props) => {
     <div>
       <h3>Welcome to your Smart Shopping list!</h3>
       <NavLink to="/list">
-        <button onClick={props.newToken}>Join an existing list</button>
+        <button onClick={props.newToken}>Create a new list</button>
       </NavLink>
-      {/* <NavLink to='/list'><button onClick={props.newToken()}>Create a New List</button></NavLink> */}
     </div>
   );
 };
