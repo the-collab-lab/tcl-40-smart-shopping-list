@@ -1,56 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { getToken, words } from '@the-collab-lab/shopping-list-utils';
+import CreateList from '../../components/Home/CreateList';
+import JoinList from '../../components/Home/JoinList';
 
-const Home = () => {
-  // if user does not have a token in localStorage
-  // const [token, setToken] = useState(localStorage.getItem('token'));
+const Home = (props) => {
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [hasToken, setHasToken] = useState(token !== null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     console.log('token: ', token);
-    // if (!token) {
-    //   setToken(localStorage.setItem('token', getToken()))
-    // }
+    setHasToken(token !== null);
   }, []);
 
-  // const checkLocalStorage = () => {
-  //   localStorage.getItem(); //insert name of property you set the token to
-  // };
-
-  // show button/link on home screen to "create a new list"
-
-  // onClick generates a new token and saves to localStorage
-
   const handleCreateToken = () => {
-    localStorage.setItem('token', getToken());
+    setToken(localStorage.setItem('token', getToken()));
+    console.log('token:', token);
   };
 
-  // const saveToLocalStorage = () => {
-  // };
-
-  // render "List" view
-
-  // else (if user does have a token in localStorage)
-  // render "List" view
+  const savedToken = localStorage.getItem('token');
 
   return (
-    <div className="welcome">
-      <div>
-        <p>(show if user does not have a token)</p>
-        <h3>Welcome to your Smart Shopping list!</h3>
-        <button onClick={handleCreateToken}>Create a New List</button>
-
-        <p>(show if user has a token)</p>
-
-        <p> Join an existing shopping list by entering a three word token </p>
-        <div>
-          <form>
-            <label htmlFor="share-token">Share Token:</label>
-            <input type="text" placeholder="three word token" />
-          </form>
-        </div>
-        <button>Join an existing list</button>
-      </div>
+    <div>
+      {!hasToken ? (
+        <CreateList newToken={props.handleCreateToken} />
+      ) : (
+        <JoinList token={savedToken} />
+      )}
     </div>
   );
 };
