@@ -8,7 +8,10 @@ const JoinList = (props) => {
       <p> Join an existing shopping list by entering a three word token </p>
       <div>
         <label htmlFor="share-token">Share Token:</label>
-        <input type="text" placeholder="three word token" value={props.token} />
+        <input 
+            type="text" 
+            placeholder="three word token" 
+            defaultValue={props.token} />
       </div>
       <NavLink to="/list">
         <button>Join an existing list</button>
