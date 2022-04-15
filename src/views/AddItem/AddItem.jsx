@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { userToken } from '../../utils/localStorage';
@@ -7,14 +7,7 @@ export default function AddItem() {
   const [listItem, setListItem] = useState({
     name: '',
     frequency: '7',
-    date: '',
   });
-
-  //this useEffect will be removed when we merge our branches together because we no longer have to create a dummy variable, we will stricly grab the user token from local storage
-  useEffect(() => {
-    const dummyVariable = 'KN';
-    localStorage.setItem('item', JSON.stringify(dummyVariable));
-  }, []);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -40,7 +33,7 @@ export default function AddItem() {
     }
   };
 
-  const { name, frequency, date } = listItem;
+  const { name, frequency } = listItem;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -82,14 +75,6 @@ export default function AddItem() {
           onChange={handleInput}
         />
       </fieldset>
-      <label htmlFor="lastPurchase">Date of Last Purchase</label>
-      <input
-        type="date"
-        id="lastPurchase"
-        onChange={handleInput}
-        value={date}
-        name="date"
-      />
       <button type="submit">Add Item</button>
     </form>
   );
