@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc } from 'firebase/firestore';
-import { userToken } from '../../utils/localStorage';
 
-export default function AddItem() {
+export default function AddItem({ token }) {
   const [listItem, setListItem] = useState({
     name: '',
     frequency: '7',
@@ -25,7 +24,7 @@ export default function AddItem() {
 
   const addItem = async () => {
     try {
-      await addDoc(collection(db, userToken), {
+      await addDoc(collection(db, token), {
         property: listItem,
       });
     } catch (e) {

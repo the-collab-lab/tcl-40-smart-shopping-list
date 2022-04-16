@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { userToken } from '../../utils/localStorage';
 
-export default function List() {
+export default function List({ token }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, userToken), (snapshot) => {
+    const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
       snapshot.forEach((doc) => snapshotDocs.push(doc.data().property));
       setData(snapshotDocs);
