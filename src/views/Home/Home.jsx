@@ -30,11 +30,12 @@ const Home = ({ token, setToken }) => {
 
   return (
     <div>
-      {!hasToken ? (
-        <CreateList newToken={handleCreateToken} />
-      ) : (
-        <JoinList token={token} handleClick={handleJoinList} />
-      )}
+      {/* {!hasToken ? ( */}
+      <CreateList newToken={handleCreateToken} />
+      {/* ) : ( */}
+      <p> -- or -- </p>
+      <JoinList token={token} handleClick={handleJoinList} />
+      {/* )} */}
     </div>
   );
 };
