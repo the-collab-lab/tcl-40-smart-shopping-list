@@ -45,11 +45,14 @@ export default function AddItem({ token }) {
       return;
     } else {
       addItem();
-      setError('');
       setListItem({
         name: '',
         frequency: '7',
       });
+      setError('Item added successfully!');
+      setTimeout(() => {
+        setError('');
+      }, 3000);
     }
   };
 
