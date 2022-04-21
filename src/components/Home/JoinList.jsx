@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const JoinList = ({ token, handleClick, handleChange }) => {
   return (
@@ -15,9 +15,9 @@ const JoinList = ({ token, handleClick, handleChange }) => {
           onChange={handleChange}
         />
       </div>
-      <NavLink to="/list">
+      <Link to="/list">
         <button onClick={handleClick}>Join an existing list</button>
-      </NavLink>
+      </Link>
     </div>
   );
 };
