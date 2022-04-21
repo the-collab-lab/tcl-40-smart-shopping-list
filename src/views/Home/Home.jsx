@@ -3,13 +3,21 @@ import { getToken } from '@the-collab-lab/shopping-list-utils';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 import { getFirestore } from 'firebase/firestore';
+import { Navigate } from 'react-router-dom';
 
-const Home = ({ token, setToken }) => {
-  const [hasToken, setHasToken] = useState(token !== null);
+const Home = ({ token, setToken, hasToken, setHasToken }) => {
+  const [joinList, setJoinList] = useState();
+
+  const handleChange = (e) => {
+    setJoinList(e.target.value);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setHasToken(token !== null);
+    if (hasToken) {
+      <Navigate to="/list" />;
+    }
   }, []);
 
   const handleCreateToken = () => {
@@ -17,25 +25,20 @@ const Home = ({ token, setToken }) => {
     localStorage.setItem('token', newToken);
     setToken(newToken);
   };
-
   const handleJoinList = () => {
-    // const token = localStorage.getItem('token')
-    console.log('this is a fun console log');
-    getFirestore.listCollections().then((collections) => {
-      for (let collection of collections) {
-        console.log(`Found collection with id: ${collection.id}`);
-      }
-    });
+    // set user input token to local storage as the token
+    // send user to List view
+    // maybe to handle error we can use a Try Catch in the useEffect on the List view
   };
 
   return (
     <div>
-      {/* {!hasToken ? ( */}
       <CreateList newToken={handleCreateToken} />
-      {/* ) : ( */}
-      <p> -- or -- </p>
-      <JoinList token={token} handleClick={handleJoinList} />
-      {/* )} */}
+      <JoinList
+        token={token}
+        handleClick={handleJoinList}
+        handleChange={handleChange}
+      />
     </div>
   );
 };
