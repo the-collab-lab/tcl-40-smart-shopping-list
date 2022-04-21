@@ -6,7 +6,7 @@ export default function List({ token }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'faketoken'), (snapshot) => {
+    const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
       snapshot.forEach((doc) => snapshotDocs.push(doc.data().property));
       setData(snapshotDocs);

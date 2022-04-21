@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const JoinList = ({ token, handleClick }) => {
+const JoinList = ({ token, handleClick, handleChange }) => {
   return (
     <div>
       <h3>Welcome to your Smart Shopping list!</h3>
@@ -12,6 +12,7 @@ const JoinList = ({ token, handleClick }) => {
           type="text"
           placeholder="three word token"
           defaultValue={token}
+          onChange={handleChange}
         />
       </div>
       {/* <NavLink to="/list"> */}
