@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = ({ token, setToken, hasToken, setHasToken }) => {
   const [joinList, setJoinList] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setJoinList(e.target.value);
@@ -14,14 +15,11 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setHasToken(token !== null);
-    useNavigateUser();
-    
+    const navigateToList = () => navigate(`/list`);
+    if (hasToken) {
+      navigateToList();
+    }
   }, []);
-
-  const useNavigateUser = () => {
-    let navigate = useNavigate();
-  hasToken ? navigate(`/list`) :  navigate(`/home`)
-  }
 
   const handleCreateToken = () => {
     const newToken = getToken();
@@ -31,9 +29,6 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
   const handleJoinList = () => {
     localStorage.setItem('token', joinList);
     setToken(joinList);
-    // set user input token to local storage as the token
-    // send user to List view
-    // maybe to handle error we can use a Try Catch in the useEffect on the List view
   };
 
   return (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
-import { Navigate } from 'react-router-dom';
 
 export default function List({ token }) {
   const [data, setData] = useState([]);
