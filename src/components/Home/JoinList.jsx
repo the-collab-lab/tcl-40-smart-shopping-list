@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
-const JoinList = ({ token, handleClick, handleChange }) => {
+const JoinList = ({ token, handleClick, handleChange, formError }) => {
   return (
     <div>
-      {/* <h3>Welcome to your Smart Shopping list!</h3> */}
-      <p> Join an existing shopping list by entering a three word token </p>
+      {formError ? (
+        <p>{formError}</p>
+      ) : (
+        <p> Join an existing shopping list by entering a three word token </p>
+      )}
+
       <div>
         <label htmlFor="share-token">Share Token:</label>
         <input
@@ -15,9 +18,7 @@ const JoinList = ({ token, handleClick, handleChange }) => {
           onChange={handleChange}
         />
       </div>
-      <Link to="/list">
-        <button onClick={handleClick}>Join an existing list</button>
-      </Link>
+      <button onClick={handleClick}>Join an existing list</button>
     </div>
   );
 };
