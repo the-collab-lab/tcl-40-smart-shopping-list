@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const JoinList = ({ token, handleClick, handleChange }) => {
   return (
     <div>
-      {/* <h3>Welcome to your Smart Shopping list!</h3> */}
       <p> Join an existing shopping list by entering a three word token </p>
       <div>
         <label htmlFor="share-token">Share Token:</label>
