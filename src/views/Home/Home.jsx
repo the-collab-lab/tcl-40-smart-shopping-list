@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { getToken } from '@the-collab-lab/shopping-list-utils';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../../lib/firebase';
+import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
-import { useNavigate } from 'react-router-dom';
 
 const Home = ({ token, setToken, hasToken, setHasToken }) => {
   const [joinList, setJoinList] = useState();
+  const [formError, setFormError] = useState();
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,10 +19,6 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setHasToken(token !== null);
-    const navigateToList = () => navigate(`/list`);
-    if (hasToken) {
-      navigateToList();
-    }
   }, []);
 
   const handleCreateToken = () => {
@@ -26,9 +26,23 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
     localStorage.setItem('token', newToken);
     setToken(newToken);
   };
-  const handleJoinList = () => {
-    localStorage.setItem('token', joinList);
-    setToken(joinList);
+
+  const handleJoinList = async () => {
+    //first we query the firebase database with the input token
+    const q = query(collection(db, joinList));
+    //then we take a snapshot of the results by calling getDocs() on our query
+    const querySnapshot = await getDocs(q);
+    // console.log('QUERY SNAPSHOT', querySnapshot.size)
+    // if the snapshot.size is greater than one, we can assume it's a valid list, set the token in state, and navigate the user to the list view
+    if (querySnapshot.size > 1) {
+      localStorage.setItem('token', joinList);
+      setToken(joinList);
+      navigate(`/list`);
+    }
+    // otherwise set an error in state we can pass to the join list component
+    setFormError(
+      'This token does not match an existing shopping list. Please check your input and try again.',
+    );
   };
 
   return (
@@ -38,6 +52,7 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
         token={token}
         handleClick={handleJoinList}
         handleChange={handleChange}
+        formError={formError}
       />
     </div>
   );
