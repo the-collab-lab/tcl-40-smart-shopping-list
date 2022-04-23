@@ -32,7 +32,7 @@ export default function AddItem({ token }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const checkForErrors = validateItem();
+    const checkForErrors = checkforDuplicateItems();
     if (checkForErrors) {
       setError('Item already in list!');
       setListItem({
@@ -50,7 +50,7 @@ export default function AddItem({ token }) {
     }
   };
 
-  const validateItem = () => {
+  const checkforDuplicateItems = () => {
     //get the value the user typed
     //preserve that value
     //get the whole list from firebase
