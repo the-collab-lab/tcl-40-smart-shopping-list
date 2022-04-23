@@ -32,16 +32,13 @@ export default function AddItem({ token }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const checkForErrors = validate();
+    const checkForErrors = validateItem();
     if (checkForErrors) {
       setError('Item already in list!');
       setListItem({
         name: '',
         frequency: '7',
       });
-      setTimeout(() => {
-        setError('');
-      }, 3000);
       return;
     } else {
       addItem();
@@ -50,17 +47,14 @@ export default function AddItem({ token }) {
         frequency: '7',
       });
       setError('Item added successfully!');
-      setTimeout(() => {
-        setError('');
-      }, 3000);
     }
   };
 
-  const validate = () => {
+  const validateItem = () => {
     //get the value the user typed
     //preserve that value
     //get the whole list from firebase
-    //loop through and check each list item for a match with what the user type
+    //loop through and check each list item for a match with what the user typed
     let status = false;
     data.forEach((item) => {
       let editedItem = item.name;
