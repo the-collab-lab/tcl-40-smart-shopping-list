@@ -17,7 +17,6 @@ const JoinList = ({ token, handleClick, handleChange, formError }) => {
           onChange={handleChange}
         />
       </div>
-      ``
       <button onClick={handleClick}>Join an existing list</button>
     </div>
   );
