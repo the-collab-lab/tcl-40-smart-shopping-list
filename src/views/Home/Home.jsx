@@ -23,7 +23,7 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
     if (hasToken) {
       navigateToList();
     }
-  }, []);
+  }, [hasToken, navigate, setHasToken]);
 
   const handleCreateToken = () => {
     const newToken = getToken();

@@ -14,7 +14,7 @@ export default function List({ token }) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [token]);
 
   return (
     <ul>
