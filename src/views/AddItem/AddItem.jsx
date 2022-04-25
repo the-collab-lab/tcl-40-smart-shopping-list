@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot } from 'firebase/firestore';
 
 export default function AddItem({ token }) {
   const [listItem, setListItem] = useState({
     name: '',
     frequency: '7',
   });
+  const [error, setError] = useState('');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
+      const snapshotDocs = [];
+      snapshot.forEach((doc) => snapshotDocs.push(doc.data().property));
+      setData(snapshotDocs);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -19,7 +32,42 @@ export default function AddItem({ token }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addItem();
+    const checkForErrors = checkforDuplicateItems();
+    if (checkForErrors) {
+      setError('Item already in list!');
+      setListItem({
+        name: '',
+        frequency: '7',
+      });
+      return;
+    } else {
+      addItem();
+      setListItem({
+        name: '',
+        frequency: '7',
+      });
+      setError('Item added successfully!');
+    }
+  };
+
+  const checkforDuplicateItems = () => {
+    //get the value the user typed
+    //preserve that value
+    //get the whole list from firebase
+    //loop through and check each list item for a match with what the user typed
+    let status = false;
+    data.forEach((item) => {
+      let editedItem = item.name;
+      //use regex to find and replace any punctuation with and empty string
+      let result = editedItem.replace(/[\W|_]/g, '');
+      let editedName = name;
+      let nameResult = editedName.replace(/[\W|_]/g, '');
+      //use the punctuation free version of the item to check for equality
+      if (result.toLowerCase() === nameResult.toLowerCase()) {
+        status = true;
+      }
+    });
+    return status;
   };
 
   const addItem = async () => {
@@ -44,6 +92,7 @@ export default function AddItem({ token }) {
         value={name}
         name="name"
       />
+      <span>{error}</span>
       <fieldset>
         <legend>Frequency</legend>
         <label htmlFor="7">Soon</label>
