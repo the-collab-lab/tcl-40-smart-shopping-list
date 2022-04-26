@@ -13,7 +13,7 @@ export default function AddItem({ token }) {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
-      snapshot.forEach((doc) => snapshotDocs.push(doc.data().property));
+      snapshot.forEach((doc) => snapshotDocs.push(doc.data()));
       setData(snapshotDocs);
     });
     return () => {
@@ -72,9 +72,7 @@ export default function AddItem({ token }) {
 
   const addItem = async () => {
     try {
-      await addDoc(collection(db, token), {
-        property: listItem,
-      });
+      await addDoc(collection(db, token), listItem);
     } catch (e) {
       console.error(e);
     }

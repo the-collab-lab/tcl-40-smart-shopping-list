@@ -8,7 +8,7 @@ export default function List({ token }) {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
-      snapshot.forEach((doc) => snapshotDocs.push(doc.data().property));
+      snapshot.forEach((doc) => snapshotDocs.push(doc.data()));
       setData(snapshotDocs);
     });
     return () => {
