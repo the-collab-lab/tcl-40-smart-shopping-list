@@ -1,14 +1,17 @@
+.navLinks {
+  margin: 5px;
+}
+
 .active {
   font-weight: 800;
+  background-color: blue;
+  color: white;
 }
 
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-bottom: 6em;
-}
-
-.navLinks {
-  margin: 5px;
+  align-items: center;
+  height: 75px;
 }

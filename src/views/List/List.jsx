@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Link } from 'react-router-dom';
+import { SiProbot } from 'react-icons/si';
+import '../../App.css';
+import './List.css';
+import Footer from '../../components/Footer/Footer';
 
 export default function List({ token }) {
   const [data, setData] = useState([]);
@@ -18,20 +22,29 @@ export default function List({ token }) {
   }, []);
 
   return (
-    <>
-      {data.length ? (
-        <ul>
-          {data.map((listItem, index) => {
-            const { name } = listItem;
-            return <li key={index}>{name}</li>;
-          })}
-        </ul>
-      ) : (
-        <>
-          <p>Your list is empty. Please add something.</p>
-          <Link to="/additem">Add Item</Link>
-        </>
-      )}
-    </>
+    <section>
+      <div className="div">
+        {data.length ? (
+          <ul>
+            {data.map((listItem, index) => {
+              const { name } = listItem;
+              return <li key={index}>{name}</li>;
+            })}
+          </ul>
+        ) : (
+          <>
+            <h1>Smart Shopping List</h1>
+            <div className="icons">
+              <SiProbot className="icon" />
+            </div>
+            <p className="message">Your list is empty. Please add something.</p>
+            <Link to="/additem" className="btn add-btn">
+              Add Item
+            </Link>
+          </>
+        )}
+      </div>
+      <Footer />
+    </section>
   );
 }
