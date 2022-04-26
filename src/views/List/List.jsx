@@ -8,7 +8,11 @@ export default function List({ token }) {
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
-      snapshot.forEach((doc) => snapshotDocs.push(doc.data()));
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        data.id = doc.id;
+        snapshotDocs.push(data);
+      });
       setData(snapshotDocs);
     });
     return () => {
@@ -16,11 +20,27 @@ export default function List({ token }) {
     };
   }, [token]);
 
+  const onChange = () => {
+    console.log('hello');
+  };
+
   return (
     <ul>
       {data.map((listItem, index) => {
-        const { name } = listItem;
-        return <li key={index}>{name}</li>;
+        console.log(listItem);
+        const { name, isActive } = listItem;
+        return (
+          <li key={index}>
+            {' '}
+            <input
+              onChange={onChange}
+              checked={isActive}
+              type="checkbox"
+              id={name}
+            />{' '}
+            <label htmlFor={name}>{name}</label>
+          </li>
+        );
       })}
     </ul>
   );
