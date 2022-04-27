@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc, onSnapshot } from 'firebase/firestore';
 
+const INITIAL_STATE = {
+  name: '',
+  frequency: '7',
+  isActive: false,
+  lastPurchasedAt: null,
+};
+
 export default function AddItem({ token }) {
-  const [listItem, setListItem] = useState({
-    name: '',
-    frequency: '7',
-    isActive: false,
-    lastPurchasedAt: null,
-  });
+  const [listItem, setListItem] = useState(INITIAL_STATE);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
 
@@ -37,17 +39,11 @@ export default function AddItem({ token }) {
     const checkForErrors = checkforDuplicateItems();
     if (checkForErrors) {
       setError('Item already in list!');
-      setListItem({
-        name: '',
-        frequency: '7',
-      });
+      setListItem(INITIAL_STATE);
       return;
     } else {
       addItem();
-      setListItem({
-        name: '',
-        frequency: '7',
-      });
+      setListItem(INITIAL_STATE);
       setError('Item added successfully!');
     }
   };
