@@ -20,8 +20,19 @@ export default function List({ token }) {
     };
   }, [token]);
 
-  const onChange = () => {
-    console.log('hello');
+  const onChange = (listItem) => {
+    const { isActive, id } = listItem;
+    // this will represent the last purchased date rather than the current time
+    const now = Date.now();
+    const lastPurchasedAtInMS = Date.now() - 86400000;
+    const delta = now - lastPurchasedAtInMS;
+    const nextData = data.map((doc) => {
+      if (doc.id === id) {
+        doc.isActive = !doc.isActive;
+      }
+      return doc;
+    });
+    setData(nextData);
   };
 
   return (
@@ -33,7 +44,7 @@ export default function List({ token }) {
           <li key={index}>
             {' '}
             <input
-              onChange={onChange}
+              onChange={() => onChange(listItem)}
               checked={isActive}
               type="checkbox"
               id={name}
