@@ -6,6 +6,8 @@ export default function AddItem({ token }) {
   const [listItem, setListItem] = useState({
     name: '',
     frequency: '7',
+    isActive: false,
+    lastPurchasedAt: null,
   });
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
