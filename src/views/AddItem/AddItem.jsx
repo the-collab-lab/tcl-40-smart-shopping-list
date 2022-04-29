@@ -23,7 +23,7 @@ export default function AddItem({ token }) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
