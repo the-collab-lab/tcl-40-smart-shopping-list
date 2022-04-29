@@ -20,12 +20,12 @@ export default function List({ token }) {
     };
   }, [token]);
 
+  // on each re-render, we loop through the react data array to check the current time against the last purchased at time
   useEffect(() => {
     data.forEach((item) => {
       const now = Date.now();
       const delta = now - item.lastPurchasedAt;
-      // console.log(item.name,'now', now)
-      // console.log(item.name,'delta', delta)
+      // we then feed the delta and the item into our unCheck function and if the item has a delta greater than 86400000 we run update the isActive property in firebase
       unCheckItem(item, delta);
     });
   });
@@ -41,11 +41,8 @@ export default function List({ token }) {
   };
 
   const onChange = async (listItem) => {
+    //when an item is checked, we map through the data array and update the React state
     const { isActive, id } = listItem;
-    // this will represent the last purchased date rather than the current time
-    // const now = Date.now();
-    // const lastPurchasedAtInMS = Date.now() - 86400000;
-    // const delta = now - lastPurchasedAtInMS;
     const nextData = data.map((item) => {
       if (item.id === id) {
         item.isActive = !item.isActive;
@@ -53,6 +50,7 @@ export default function List({ token }) {
       return item;
     });
     setData(nextData);
+    //then we use the updateDoc function to update Firebase
     const updatedDoc = doc(db, token, listItem.id);
     await updateDoc(updatedDoc, {
       isActive: !isActive,
