@@ -2,24 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc, onSnapshot } from 'firebase/firestore';
 
+const INITIAL_STATE = {
+  name: '',
+  frequency: '7',
+  isActive: false,
+  lastPurchasedAt: null,
+};
+
 export default function AddItem({ token }) {
-  const [listItem, setListItem] = useState({
-    name: '',
-    frequency: '7',
-  });
+  const [listItem, setListItem] = useState(INITIAL_STATE);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
-      snapshot.forEach((doc) => snapshotDocs.push(doc.data().property));
+      snapshot.forEach((doc) => snapshotDocs.push(doc.data()));
       setData(snapshotDocs);
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -35,17 +39,11 @@ export default function AddItem({ token }) {
     const checkForErrors = checkforDuplicateItems();
     if (checkForErrors) {
       setError('Item already in list!');
-      setListItem({
-        name: '',
-        frequency: '7',
-      });
+      setListItem(INITIAL_STATE);
       return;
     } else {
       addItem();
-      setListItem({
-        name: '',
-        frequency: '7',
-      });
+      setListItem(INITIAL_STATE);
       setError('Item added successfully!');
     }
   };
@@ -72,9 +70,7 @@ export default function AddItem({ token }) {
 
   const addItem = async () => {
     try {
-      await addDoc(collection(db, token), {
-        property: listItem,
-      });
+      await addDoc(collection(db, token), listItem);
     } catch (e) {
       console.error(e);
     }
