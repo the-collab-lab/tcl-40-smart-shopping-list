@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   height: 100vh;
   display: flex;
@@ -5,4 +11,21 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   text-align: center;
+  color: black;
+  margin: 0;
+}
+
+.btn {
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 0.5rem;
+  margin: 1rem;
+  display: block;
+  width: 6rem;
+  color: blue;
+  border: 2px solid blue;
+}
+
+.add-btn {
+  margin: 0 auto;
 }

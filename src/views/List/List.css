@@ -1,0 +1,25 @@
+.div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+  height: calc(100vh - 75px);
+  gap: 1rem;
+  padding-top: 2rem;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.icon {
+  font-size: 2rem;
+  display: block;
+}
+
+.message {
+  margin-top: 2rem;
+}

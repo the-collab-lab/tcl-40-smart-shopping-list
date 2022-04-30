@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
+import { Link } from 'react-router-dom';
+import { SiProbot } from 'react-icons/si';
+import '../../App.css';
+import './List.css';
+import Footer from '../../components/Footer/Footer';
 
 export default function List({ token }) {
   const [data, setData] = useState([]);
@@ -59,23 +64,41 @@ export default function List({ token }) {
   };
 
   return (
-    <ul>
-      {data.map((listItem, index) => {
-        console.log(listItem);
-        const { name, isActive } = listItem;
-        return (
-          <li key={index}>
-            {' '}
-            <input
-              onChange={() => onChange(listItem)}
-              checked={isActive}
-              type="checkbox"
-              id={name}
-            />{' '}
-            <label htmlFor={name}>{name}</label>
-          </li>
-        );
-      })}
-    </ul>
+    <section>
+      <div className="div">
+        {data.length ? (
+          <ul>
+            {data.map((listItem, index) => {
+              console.log(listItem);
+              const { name, isActive } = listItem;
+              return (
+                <li key={index}>
+                  {' '}
+                  <input
+                    onChange={() => onChange(listItem)}
+                    checked={isActive}
+                    type="checkbox"
+                    id={name}
+                  />{' '}
+                  <label htmlFor={name}>{name}</label>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <>
+            <h1>Smart Shopping List</h1>
+            <div className="icons">
+              <SiProbot className="icon" />
+            </div>
+            <p className="message">Your list is empty. Please add something.</p>
+            <Link to="/additem" className="btn add-btn">
+              Add Item
+            </Link>
+          </>
+        )}
+      </div>
+      <Footer />
+    </section>
   );
 }

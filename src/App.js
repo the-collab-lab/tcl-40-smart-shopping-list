@@ -27,7 +27,6 @@ function App() {
         <Route path="/list" element={<List token={token} />} />
         <Route path="/additem" element={<AddItem token={token} />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }
