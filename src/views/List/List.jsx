@@ -6,7 +6,7 @@ import { SiProbot } from 'react-icons/si';
 import '../../App.css';
 import './List.css';
 import Footer from '../../components/Footer/Footer';
-//comment
+
 export default function List({ token }) {
   const [data, setData] = useState([]);
 
