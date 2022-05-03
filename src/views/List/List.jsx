@@ -9,6 +9,10 @@ import Footer from '../../components/Footer/Footer';
 
 export default function List({ token }) {
   const [data, setData] = useState([]);
+  //this is just a duplicate of the data, so that the real data is never touched, its populated in the useEffect
+  const [copyOfData, setCopyOfData] = useState([]);
+  //this is search input the user types in the textbox, this is set as the value, so its a controlled input
+  const [searchInput, setSearchInput] = useState();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
@@ -19,6 +23,8 @@ export default function List({ token }) {
         snapshotDocs.push(data);
       });
       setData(snapshotDocs);
+      //duplicate data from firebase to be manipulated
+      setCopyOfData(snapshotDocs);
     });
     return () => {
       unsubscribe();
@@ -63,12 +69,32 @@ export default function List({ token }) {
     });
   };
 
+  //this function filters the data received from firebase based on what the user types, its attached to the onchange for the input box so that its updated as the user types
+  const filterList = (e) => {
+    const { value } = e.target;
+    setSearchInput(value);
+    //the original data set is filtered so we always search from all the list items
+    let searchResults = data.filter((listItem) => {
+      return listItem.name.includes(searchInput);
+    });
+    //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
+    value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
+  };
+
   return (
     <section>
       <div className="div">
-        {data.length ? (
+        {/* I added this for testing purposes */}
+        <input
+          type="text"
+          name="search"
+          id="search"
+          onChange={filterList}
+          value={searchInput}
+        />
+        {copyOfData.length ? (
           <ul>
-            {data.map((listItem, index) => {
+            {copyOfData.map((listItem, index) => {
               console.log(listItem);
               const { name, isActive } = listItem;
               return (
