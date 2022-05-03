@@ -3,6 +3,7 @@ import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Link } from 'react-router-dom';
 import { SiProbot } from 'react-icons/si';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 import '../../App.css';
 import './List.css';
 import Footer from '../../components/Footer/Footer';
@@ -79,6 +80,7 @@ export default function List({ token }) {
                     checked={isActive}
                     type="checkbox"
                     id={name}
+                    name={listItem.id}
                   />{' '}
                   <label htmlFor={name}>{name}</label>
                 </li>
@@ -102,3 +104,17 @@ export default function List({ token }) {
     </section>
   );
 }
+
+// const itemToUpdate = {
+//   previousEstimate: calculateEstimate(item.previousEstimate, item.daysSinceLastPurchase, item.totalPurchases),
+//   item.totalPurchases: item.totalPurchases+1,
+//   purchasedDate: today(), (some function that returns today's date)
+//   }
+
+// const dateOfLastTransaction =
+//       itemToUpdate.totalPurchases > 0
+//         ? itemToUpdate.lastPurchasedAt
+//         : itemToUpdate.createdAt;
+
+// const daysSinceLastTransaction =
+//       (Date.now() - dateOfLastTransaction) / Math.pow(8.64, 7);
