@@ -41,6 +41,17 @@ export default function List({ token }) {
     });
   });
 
+  //added searchInput state value as a dependency so the search criteria updates as soon as the user types
+  useEffect(() => {
+    //the original data set is filtered so we always search from all the list items
+    let searchResults = data.filter((listItem) => {
+      return listItem.name.toLowerCase().includes(searchInput.toLowerCase());
+    });
+    //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
+    //value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
+    searchInput === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
+  }, [searchInput]);
+
   const unCheckItem = async (item, delta) => {
     if (delta > 86400000) {
       item.isActive = false;
@@ -69,16 +80,10 @@ export default function List({ token }) {
     });
   };
 
-  //this function filters the data received from firebase based on what the user types, its attached to the onchange for the input box so that its updated as the user types
-  const filterList = async (e) => {
+  //onChange handler for search input
+  const filterList = (e) => {
     const { value } = e.target;
     setSearchInput(value);
-    //the original data set is filtered so we always search from all the list items
-    let searchResults = data.filter((listItem) => {
-      return listItem.name.toLowerCase().includes(searchInput.toLowerCase());
-    });
-    //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
-    value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
   };
 
   return (
