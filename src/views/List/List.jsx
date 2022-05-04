@@ -51,6 +51,10 @@ export default function List({ token }) {
     //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
     //value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
     searchInput === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
+    //if the search results return no entries, set the search Error to display to the user indicating no entries were found
+    searchResults.length < 1
+      ? setSearchError('No List Items Match Your Search')
+      : setSearchError('');
   }, [searchInput]);
 
   const unCheckItem = async (item, delta) => {
@@ -91,10 +95,6 @@ export default function List({ token }) {
     });
     //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
     value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
-    //if the search results return no entries, set the search Error to display to the user indicating no entries were found
-    searchResults.length < 1
-      ? setSearchError('No List Items Match Your Search')
-      : setSearchError('');
   };
 
   return (
