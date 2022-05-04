@@ -13,9 +13,7 @@ export default function List({ token }) {
   const [copyOfData, setCopyOfData] = useState([]);
   //this is search input the user types in the textbox, this is set as the value, so its a controlled input
   const [searchInput, setSearchInput] = useState('');
-
-  console.log('copyOfData', copyOfData);
-  console.log('searchInput', searchInput);
+  const [searchError, setSearchError] = useState('');
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
@@ -82,6 +80,10 @@ export default function List({ token }) {
     });
     //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
     value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
+    //if the search results return no entries, set the search Error to display to the user indicating no entries were found
+    searchResults.length < 1
+      ? setSearchError('No List Items Match Your Search')
+      : setSearchError('');
   };
 
   return (
@@ -104,6 +106,7 @@ export default function List({ token }) {
         ) : null}
         {data.length ? (
           <ul>
+            <p>{searchError}</p>
             {copyOfData.map((listItem, index) => {
               const { name, isActive } = listItem;
               return (
