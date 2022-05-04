@@ -55,7 +55,7 @@ export default function List({ token }) {
     searchResults.length < 1
       ? setSearchError('No List Items Match Your Search')
       : setSearchError('');
-  }, [searchInput]);
+  }, [searchInput, data]);
 
   const unCheckItem = async (item, delta) => {
     if (delta > 86400000) {
