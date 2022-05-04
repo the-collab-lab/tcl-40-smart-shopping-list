@@ -8,9 +8,9 @@ const INITIAL_STATE = {
   frequency: '7',
   isActive: false,
   lastPurchasedAt: null,
-  //daysSinceLastPurchase: null,
-  //previousEstimate: previousEstimate: Number(frequency)
-  //timesPurchased: null
+  daysSinceLastPurchase: null,
+  previousEstimate: null,
+  timesPurchased: 0,
 };
 
 export default function AddItem({ token }) {
