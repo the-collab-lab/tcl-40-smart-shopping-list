@@ -102,7 +102,7 @@ export default function List({ token }) {
             />
           </label>
         ) : null}
-        {copyOfData.length ? (
+        {data.length ? (
           <ul>
             {copyOfData.map((listItem, index) => {
               const { name, isActive } = listItem;
