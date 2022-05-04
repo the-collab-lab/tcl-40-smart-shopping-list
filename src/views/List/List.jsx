@@ -14,6 +14,9 @@ export default function List({ token }) {
   //this is search input the user types in the textbox, this is set as the value, so its a controlled input
   const [searchInput, setSearchInput] = useState('');
 
+  console.log('copyOfData', copyOfData);
+  console.log('searchInput', searchInput);
+
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
@@ -84,18 +87,24 @@ export default function List({ token }) {
   return (
     <section>
       <div className="div">
-        {/* I added this for testing purposes */}
-        <input
-          type="text"
-          name="search"
-          id="search"
-          onChange={filterList}
-          value={searchInput}
-        />
+        {data.length > 1 ? (
+          <label htmlFor="search">
+            Search List:
+            <input
+              title="search your list"
+              aria-label="enter your search term"
+              type="search"
+              name="search"
+              id="search"
+              onChange={filterList}
+              value={searchInput || ''}
+              placeholder="e.g. potatoes"
+            />
+          </label>
+        ) : null}
         {copyOfData.length ? (
           <ul>
             {copyOfData.map((listItem, index) => {
-              console.log(listItem);
               const { name, isActive } = listItem;
               return (
                 <li key={index}>
