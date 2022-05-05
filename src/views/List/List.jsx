@@ -51,15 +51,8 @@ export default function List({ token }) {
 
   const onChange = async (listItem) => {
     //when an item is checked, we map through the data array and update the React state
-    const {
-      isActive,
-      id,
-      frequency,
-      lastPurchasedAt = Date.now(),
-      timesPurchased,
-      daysSinceLastPurchase,
-    } = listItem;
-    console.log('listItem:', listItem);
+    const { isActive, id, frequency, lastPurchasedAt, timesPurchased } =
+      listItem;
     const nextData = data.map((item) => {
       if (item.id === id) {
         item.isActive = !item.isActive;
@@ -67,30 +60,28 @@ export default function List({ token }) {
       return item;
     });
     setData(nextData);
-    console.log(nextData);
     //then we use the updateDoc function to update Firebase
     const updatedDoc = doc(db, token, listItem.id);
     const now = Date.now();
     const nextActive = !isActive;
-    // `calculateEstimate` relies on some information that we have to
-    // compute before we can run it.
-    const nextLastPurchasedAt = nextActive ? Date.now() : lastPurchasedAt;
-    const nextDaysSinceLastPurchase = nextActive
-      ? Math.floor((now - lastPurchasedAt) / 86400000) || 1
-      : daysSinceLastPurchase;
-    const nextTimesPurchased = nextActive ? timesPurchased + 1 : timesPurchased;
-
-    const nextFrequency = nextActive
-      ? calculateEstimate(frequency, nextDaysSinceLastPurchase, timesPurchased)
-      : frequency;
-
-    await updateDoc(updatedDoc, {
+    const update = {
       isActive: nextActive,
-      lastPurchasedAt: nextLastPurchasedAt,
-      frequency: nextFrequency,
-      daysSinceLastPurchase: nextDaysSinceLastPurchase,
-      timesPurchased: nextTimesPurchased,
-    });
+    };
+    if (nextActive) {
+      const daysSinceLastPurchase = lastPurchasedAt
+        ? Math.floor((now - lastPurchasedAt) / 86400000)
+        : frequency;
+      update.timesPurchased = timesPurchased + 1;
+      update.lastPurchasedAt = now;
+      update.frequency = calculateEstimate(
+        frequency,
+        daysSinceLastPurchase,
+        update.timesPurchased,
+      );
+      update.timesPurchased = timesPurchased + 1;
+    }
+
+    await updateDoc(updatedDoc, update);
   };
 
   return (
