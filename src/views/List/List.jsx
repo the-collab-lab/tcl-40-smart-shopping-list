@@ -64,16 +64,19 @@ export default function List({ token }) {
       return item;
     });
     setData(nextData);
+    console.log(nextData);
     //then we use the updateDoc function to update Firebase
     const updatedDoc = doc(db, token, listItem.id);
     const nextActive = !isActive;
     // change nextFrequency to something else if nextActive is true or else leave it as frequency
     // frequency might a string -> turn to number
-    const nextFrequency = frequency;
+    console.log('Current frequency', frequency);
     await updateDoc(updatedDoc, {
       isActive: nextActive,
       lastPurchasedAt: nextActive ? Date.now() : lastPurchasedAt,
-      frequency: nextFrequency, // really long ternary here
+      frequency: nextActive
+        ? calculateEstimate(frequency, daysSinceLastPurchase, timesPurchased)
+        : frequency,
       daysSinceLastPurchase: nextActive
         ? Math.floor((Date.now() - lastPurchasedAt) / 86400000)
         : daysSinceLastPurchase,
@@ -87,7 +90,7 @@ export default function List({ token }) {
         {data.length ? (
           <ul>
             {data.map((listItem, index) => {
-              console.log(listItem);
+              // console.log(listItem);
               const { name, isActive } = listItem;
               return (
                 <li key={index}>
