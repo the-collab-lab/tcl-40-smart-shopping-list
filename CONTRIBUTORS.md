@@ -13,6 +13,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Mentors
 
+- [Lindsey Dinkel](https://github.com/lindseyindev) 😼
 - [EJ Mason](https://github.com/mxmason) 🐧
 - [Ryan Lynch](https://github.com/shiftyp)
 
