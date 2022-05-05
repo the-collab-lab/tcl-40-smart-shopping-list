@@ -70,20 +70,26 @@ export default function List({ token }) {
     console.log(nextData);
     //then we use the updateDoc function to update Firebase
     const updatedDoc = doc(db, token, listItem.id);
+    const now = Date.now();
     const nextActive = !isActive;
-    // change nextFrequency to something else if nextActive is true or else leave it as frequency
-    // frequency might a string -> turn to number
-    console.log('Current frequency', frequency);
+    // `calculateEstimate` relies on some information that we have to
+    // compute before we can run it.
+    const nextLastPurchasedAt = nextActive ? Date.now() : lastPurchasedAt;
+    const nextDaysSinceLastPurchase = nextActive
+      ? Math.floor((now - lastPurchasedAt) / 86400000) || 1
+      : daysSinceLastPurchase;
+    const nextTimesPurchased = nextActive ? timesPurchased + 1 : timesPurchased;
+
+    const nextFrequency = nextActive
+      ? calculateEstimate(frequency, nextDaysSinceLastPurchase, timesPurchased)
+      : frequency;
+
     await updateDoc(updatedDoc, {
       isActive: nextActive,
-      lastPurchasedAt: nextActive ? Date.now() : lastPurchasedAt,
-      frequency: nextActive
-        ? calculateEstimate(frequency, daysSinceLastPurchase, timesPurchased)
-        : frequency,
-      daysSinceLastPurchase: nextActive
-        ? Math.floor((Date.now() - lastPurchasedAt) / 86400000)
-        : daysSinceLastPurchase,
-      timesPurchased: nextActive ? timesPurchased + 1 : timesPurchased,
+      lastPurchasedAt: nextLastPurchasedAt,
+      frequency: nextFrequency,
+      daysSinceLastPurchase: nextDaysSinceLastPurchase,
+      timesPurchased: nextTimesPurchased,
     });
   };
 
