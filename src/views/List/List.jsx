@@ -48,7 +48,15 @@ export default function List({ token }) {
 
   const onChange = async (listItem) => {
     //when an item is checked, we map through the data array and update the React state
-    const { isActive, id } = listItem;
+    const {
+      isActive,
+      id,
+      frequency,
+      lastPurchasedAt = Date.now(),
+      timesPurchased,
+      daysSinceLastPurchase,
+    } = listItem;
+    console.log('listItem:', listItem);
     const nextData = data.map((item) => {
       if (item.id === id) {
         item.isActive = !item.isActive;
@@ -58,9 +66,18 @@ export default function List({ token }) {
     setData(nextData);
     //then we use the updateDoc function to update Firebase
     const updatedDoc = doc(db, token, listItem.id);
+    const nextActive = !isActive;
+    // change nextFrequency to something else if nextActive is true or else leave it as frequency
+    // frequency might a string -> turn to number
+    const nextFrequency = frequency;
     await updateDoc(updatedDoc, {
-      isActive: !isActive,
-      lastPurchasedAt: Date.now(),
+      isActive: nextActive,
+      lastPurchasedAt: nextActive ? Date.now() : lastPurchasedAt,
+      frequency: nextFrequency, // really long ternary here
+      daysSinceLastPurchase: nextActive
+        ? Math.floor((Date.now() - lastPurchasedAt) / 86400000)
+        : daysSinceLastPurchase,
+      timesPurchased: nextActive ? timesPurchased + 1 : timesPurchased,
     });
   };
 

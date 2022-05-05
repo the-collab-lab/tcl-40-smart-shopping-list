@@ -9,7 +9,6 @@ const INITIAL_STATE = {
   isActive: false,
   lastPurchasedAt: null,
   daysSinceLastPurchase: null,
-  previousEstimate: null,
   timesPurchased: 0,
 };
 
