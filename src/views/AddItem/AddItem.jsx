@@ -83,6 +83,7 @@ export default function AddItem({ token }) {
   };
 
   const addItem = async () => {
+    listItem.frequency = parseInt(frequency, 10);
     try {
       await addDoc(collection(db, token), listItem);
     } catch (e) {
