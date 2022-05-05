@@ -29,6 +29,9 @@ export default function List({ token }) {
   // on each re-render, we loop through the react data array to check the current time against the last purchased at time
   useEffect(() => {
     data.forEach((item) => {
+      if (item.lastPurchasedAt === null) {
+        return;
+      }
       const now = Date.now();
       const delta = now - item.lastPurchasedAt;
       // we then feed the delta and the item into our unCheck function and if the item has a delta greater than 86400000 we run update the isActive property in firebase
