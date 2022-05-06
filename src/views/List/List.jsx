@@ -14,6 +14,7 @@ export default function List({ token }) {
   //this is search input the user types in the textbox, this is set as the value, so its a controlled input
   const [searchInput, setSearchInput] = useState('');
   const [searchError, setSearchError] = useState('');
+  const [toggleErr, setToggleErr] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
@@ -94,7 +95,13 @@ export default function List({ token }) {
       return listItem.name.toLowerCase().includes(searchInput.toLowerCase());
     });
     //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
-    value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
+    if (value === '') {
+      setCopyOfData(data);
+      setToggleErr(true);
+    } else {
+      setCopyOfData(searchResults);
+      setToggleErr(false);
+    }
   };
 
   return (
@@ -117,13 +124,19 @@ export default function List({ token }) {
         ) : null}
         {data.length ? (
           <ul>
-            <p>{searchError}</p>
+            {searchError ? (
+              <p id="search-err" class="search-error">
+                {searchError}
+              </p>
+            ) : null}
             {copyOfData.map((listItem, index) => {
               const { name, isActive } = listItem;
               return (
                 <li key={index}>
                   {' '}
                   <input
+                    aria-invalid={toggleErr}
+                    aria-errormessage="search-err"
                     onChange={() => onChange(listItem)}
                     checked={isActive}
                     type="checkbox"
