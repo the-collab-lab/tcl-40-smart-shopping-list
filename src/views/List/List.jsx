@@ -78,7 +78,6 @@ export default function List({ token }) {
         daysSinceLastPurchase,
         update.timesPurchased,
       );
-      update.timesPurchased = timesPurchased + 1;
     }
 
     await updateDoc(updatedDoc, update);
