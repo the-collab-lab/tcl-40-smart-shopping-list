@@ -125,7 +125,7 @@ export default function List({ token }) {
         {data.length ? (
           <ul>
             {searchError ? (
-              <p id="search-err" class="search-error">
+              <p role="alert" id="search-err" class="search-error">
                 {searchError}
               </p>
             ) : null}
