@@ -8,7 +8,6 @@ const INITIAL_STATE = {
   frequency: '7',
   isActive: false,
   lastPurchasedAt: null,
-  daysSinceLastPurchase: null,
   timesPurchased: 0,
 };
 
