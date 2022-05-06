@@ -50,17 +50,6 @@ export default function AddItem({ token }) {
     }
   };
 
-  // const previousEstimate = {
-  // previousEstimate: calculateEstimate(item.previousEstimate, item.daysSinceLastPurchase, item.totalPurchases)
-  // in handle submit need to submit updated data to fb like this:
-
-  // const itemToUpdate = {
-  // previousEstimate: calculateEstimate(item.previousEstimate, item.daysSinceLastPurchase, item.totalPurchases),
-  // item.totalPurchases: item.totalPurchases+1,
-  // purchasedDate: today(), (some function that returns today's date)
-  // }
-  // }
-
   const checkforDuplicateItems = () => {
     //get the value the user typed
     //preserve that value
