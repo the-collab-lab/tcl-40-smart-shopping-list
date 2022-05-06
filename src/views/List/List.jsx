@@ -136,6 +136,7 @@ export default function List({ token }) {
                   {' '}
                   <input
                     aria-invalid={toggleErr}
+                    aria-describedby="search-err"
                     aria-errormessage="search-err"
                     onChange={() => onChange(listItem)}
                     checked={isActive}
