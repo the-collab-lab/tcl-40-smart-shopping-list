@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   frequency: '7',
   isActive: false,
   lastPurchasedAt: null,
+  timesPurchased: 0,
 };
 
 export default function AddItem({ token }) {
@@ -70,11 +71,13 @@ export default function AddItem({ token }) {
   };
 
   const addItem = async () => {
+    listItem.frequency = parseInt(frequency, 10);
     try {
       await addDoc(collection(db, token), listItem);
     } catch (e) {
       console.error(e);
     }
+    //updateNumberOfPurchases();
   };
 
   const { name, frequency } = listItem;

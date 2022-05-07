@@ -3,6 +3,7 @@ import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Link } from 'react-router-dom';
 import { SiProbot } from 'react-icons/si';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 import '../../App.css';
 import './List.css';
 import Footer from '../../components/Footer/Footer';
@@ -36,6 +37,9 @@ export default function List({ token }) {
   // on each re-render, we loop through the react data array to check the current time against the last purchased at time
   useEffect(() => {
     data.forEach((item) => {
+      if (item.lastPurchasedAt === null) {
+        return;
+      }
       const now = Date.now();
       const delta = now - item.lastPurchasedAt;
       // we then feed the delta and the item into our unCheck function and if the item has a delta greater than 86400000 we run update the isActive property in firebase
@@ -75,7 +79,8 @@ export default function List({ token }) {
 
   const onChange = async (listItem) => {
     //when an item is checked, we map through the data array and update the React state
-    const { isActive, id } = listItem;
+    const { isActive, id, frequency, lastPurchasedAt, timesPurchased } =
+      listItem;
     const nextData = data.map((item) => {
       if (item.id === id) {
         item.isActive = !item.isActive;
@@ -85,10 +90,25 @@ export default function List({ token }) {
     setData(nextData);
     //then we use the updateDoc function to update Firebase
     const updatedDoc = doc(db, token, listItem.id);
-    await updateDoc(updatedDoc, {
-      isActive: !isActive,
-      lastPurchasedAt: Date.now(),
-    });
+    const now = Date.now();
+    const nextActive = !isActive;
+    const update = {
+      isActive: nextActive,
+    };
+    if (nextActive) {
+      const daysSinceLastPurchase = lastPurchasedAt
+        ? Math.floor((now - lastPurchasedAt) / 86400000)
+        : frequency;
+      update.timesPurchased = timesPurchased + 1;
+      update.lastPurchasedAt = now;
+      update.frequency = calculateEstimate(
+        frequency,
+        daysSinceLastPurchase,
+        update.timesPurchased,
+      );
+    }
+
+    await updateDoc(updatedDoc, update);
   };
 
   //onChange handler for search input
@@ -142,6 +162,7 @@ export default function List({ token }) {
                     checked={isActive}
                     type="checkbox"
                     id={name}
+                    name={listItem.id}
                   />{' '}
                   <label htmlFor={name}>{name}</label>
                 </li>
