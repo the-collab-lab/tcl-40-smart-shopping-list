@@ -10,6 +10,12 @@ import Footer from '../../components/Footer/Footer';
 
 export default function List({ token }) {
   const [data, setData] = useState([]);
+  //this is just a duplicate of the data, so that the real data is never touched, its populated in the useEffect
+  const [copyOfData, setCopyOfData] = useState([]);
+  //this is search input the user types in the textbox, this is set as the value, so its a controlled input
+  const [searchInput, setSearchInput] = useState('');
+  const [searchError, setSearchError] = useState('');
+  const [toggleErr, setToggleErr] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
@@ -20,6 +26,8 @@ export default function List({ token }) {
         snapshotDocs.push(data);
       });
       setData(snapshotDocs);
+      //duplicate data from firebase to be manipulated
+      setCopyOfData(snapshotDocs);
     });
     return () => {
       unsubscribe();
@@ -38,6 +46,26 @@ export default function List({ token }) {
       unCheckItem(item, delta);
     });
   });
+
+  //added searchInput state value as a dependency so the search criteria updates as soon as the user types
+  useEffect(() => {
+    //the original data set is filtered so we always search from all the list items
+    let searchResults = data.filter((listItem) => {
+      return listItem.name.toLowerCase().includes(searchInput.toLowerCase());
+    });
+    //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
+    if (searchInput === '') {
+      setCopyOfData(data);
+      setToggleErr(true);
+    } else {
+      setCopyOfData(searchResults);
+      setToggleErr(false);
+    }
+    //if the search results return no entries, set the search Error to display to the user indicating no entries were found
+    searchResults.length < 1
+      ? setSearchError('No List Items Match Your Search')
+      : setSearchError('');
+  }, [searchInput, data]);
 
   const unCheckItem = async (item, delta) => {
     if (delta > 86400000) {
@@ -83,18 +111,53 @@ export default function List({ token }) {
     await updateDoc(updatedDoc, update);
   };
 
+  //onChange handler for search input
+  const filterList = (e) => {
+    const { value } = e.target;
+    setSearchInput(value);
+  };
+
   return (
     <section>
       <div className="div">
+        {data.length > 1 ? (
+          <label htmlFor="search">
+            Search List:
+            <input
+              title="search your list"
+              aria-label="enter your search term"
+              type="search"
+              name="search"
+              id="search"
+              onChange={filterList}
+              value={searchInput || ''}
+              placeholder="e.g. potatoes"
+            />
+          </label>
+        ) : null}
         {data.length ? (
           <ul>
-            {data.map((listItem, index) => {
-              // console.log(listItem);
+            {searchError ? (
+              <p
+                role="alert"
+                id="search-err"
+                className="search-error"
+                style={{
+                  outline: '3px dashed red',
+                }}
+              >
+                {searchError}
+              </p>
+            ) : null}
+            {copyOfData.map((listItem, index) => {
               const { name, isActive } = listItem;
               return (
                 <li key={index}>
                   {' '}
                   <input
+                    aria-invalid={toggleErr}
+                    aria-describedby="search-err"
+                    aria-errormessage="search-err"
                     onChange={() => onChange(listItem)}
                     checked={isActive}
                     type="checkbox"
