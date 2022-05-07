@@ -128,7 +128,7 @@ export default function List({ token }) {
               <p
                 role="alert"
                 id="search-err"
-                class="search-error"
+                className="search-error"
                 style={{
                   outline: '3px dashed red',
                 }}
