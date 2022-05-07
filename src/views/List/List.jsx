@@ -50,8 +50,13 @@ export default function List({ token }) {
       return listItem.name.toLowerCase().includes(searchInput.toLowerCase());
     });
     //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
-    //value === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
-    searchInput === '' ? setCopyOfData(data) : setCopyOfData(searchResults);
+    if (searchInput === '') {
+      setCopyOfData(data);
+      setToggleErr(true);
+    } else {
+      setCopyOfData(searchResults);
+      setToggleErr(false);
+    }
     //if the search results return no entries, set the search Error to display to the user indicating no entries were found
     searchResults.length < 1
       ? setSearchError('No List Items Match Your Search')
@@ -90,18 +95,6 @@ export default function List({ token }) {
   const filterList = (e) => {
     const { value } = e.target;
     setSearchInput(value);
-    //the original data set is filtered so we always search from all the list items
-    let searchResults = data.filter((listItem) => {
-      return listItem.name.toLowerCase().includes(searchInput.toLowerCase());
-    });
-    //if search input is empty (the user hasnt typed anything or they removed their input), set the data back to the original list
-    if (value === '') {
-      setCopyOfData(data);
-      setToggleErr(true);
-    } else {
-      setCopyOfData(searchResults);
-      setToggleErr(false);
-    }
   };
 
   return (
