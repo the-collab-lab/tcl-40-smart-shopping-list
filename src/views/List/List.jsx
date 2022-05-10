@@ -25,9 +25,15 @@ export default function List({ token }) {
         data.id = doc.id;
         snapshotDocs.push(data);
       });
-      setData(snapshotDocs);
+      const sortedName = snapshotDocs.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      const sortedFrequency = sortedName.sort((a, b) => {
+        return a.frequency - b.frequency;
+      });
+      setData(sortedFrequency);
       //duplicate data from firebase to be manipulated
-      setCopyOfData(snapshotDocs);
+      setCopyOfData(sortedFrequency);
     });
     return () => {
       unsubscribe();
@@ -150,23 +156,104 @@ export default function List({ token }) {
               </p>
             ) : null}
             {copyOfData.map((listItem, index) => {
-              const { name, isActive } = listItem;
-              return (
-                <li key={index}>
-                  {' '}
-                  <input
-                    aria-invalid={toggleErr}
-                    aria-describedby="search-err"
-                    aria-errormessage="search-err"
-                    onChange={() => onChange(listItem)}
-                    checked={isActive}
-                    type="checkbox"
-                    id={name}
-                    name={listItem.id}
-                  />{' '}
-                  <label htmlFor={name}>{name}</label>
-                </li>
-              );
+              const {
+                name,
+                isActive,
+                frequency,
+                timesPurchased,
+                lastPurchasedAt,
+              } = listItem;
+              if (
+                frequency < 7 &&
+                (Date.now() - lastPurchasedAt) / 86400000 < frequency * 2
+              ) {
+                return (
+                  <li key={index} className="soon">
+                    {' '}
+                    <input
+                      aria-invalid={toggleErr}
+                      aria-describedby="search-err"
+                      aria-errormessage="search-err"
+                      onChange={() => onChange(listItem)}
+                      checked={isActive}
+                      type="checkbox"
+                      id={name}
+                      name={listItem.id}
+                    />{' '}
+                    <label htmlFor={name}>
+                      {name}
+                      {frequency}
+                    </label>
+                  </li>
+                );
+              } else if (
+                frequency >= 7 &&
+                frequency <= 30 &&
+                (Date.now() - lastPurchasedAt) / 86400000 < frequency * 2
+              ) {
+                return (
+                  <li key={index} className="kind-of-soon">
+                    {' '}
+                    <input
+                      aria-invalid={toggleErr}
+                      aria-describedby="search-err"
+                      aria-errormessage="search-err"
+                      onChange={() => onChange(listItem)}
+                      checked={isActive}
+                      type="checkbox"
+                      id={name}
+                      name={listItem.id}
+                    />{' '}
+                    <label htmlFor={name}>
+                      {name}
+                      {frequency}
+                    </label>
+                  </li>
+                );
+              } else if (
+                timesPurchased === 1 ||
+                (Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2
+              ) {
+                return (
+                  <li key={index} className="inactive">
+                    {' '}
+                    <input
+                      aria-invalid={toggleErr}
+                      aria-describedby="search-err"
+                      aria-errormessage="search-err"
+                      onChange={() => onChange(listItem)}
+                      checked={isActive}
+                      type="checkbox"
+                      id={name}
+                      name={listItem.id}
+                    />{' '}
+                    <label htmlFor={name}>
+                      {name}
+                      {frequency}
+                    </label>
+                  </li>
+                );
+              } else {
+                return (
+                  <li key={index} className="not-soon">
+                    {' '}
+                    <input
+                      aria-invalid={toggleErr}
+                      aria-describedby="search-err"
+                      aria-errormessage="search-err"
+                      onChange={() => onChange(listItem)}
+                      checked={isActive}
+                      type="checkbox"
+                      id={name}
+                      name={listItem.id}
+                    />{' '}
+                    <label htmlFor={name}>
+                      {name}
+                      {frequency}
+                    </label>
+                  </li>
+                );
+              }
             })}
           </ul>
         ) : (

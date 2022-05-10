@@ -23,3 +23,19 @@
 .message {
   margin-top: 2rem;
 }
+
+.soon {
+  background-color: yellow;
+}
+
+.kind-of-soon {
+  background-color: blue;
+}
+
+.not-soon {
+  background-color: red;
+}
+
+.inactive {
+  background-color: gray;
+}
