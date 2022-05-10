@@ -117,6 +117,11 @@ export default function List({ token }) {
     setSearchInput(value);
   };
 
+  //onClick handler for delete button
+  function deleteItem(item) {
+    window.confirm('You sure you want to delete this item?');
+  }
+
   return (
     <section>
       <div className="div">
@@ -164,7 +169,8 @@ export default function List({ token }) {
                     id={name}
                     name={listItem.id}
                   />{' '}
-                  <label htmlFor={name}>{name}</label> <button>Delete</button>
+                  <label htmlFor={name}>{name}</label>
+                  <button onClick={deleteItem}>Delete</button>
                 </li>
               );
             })}
