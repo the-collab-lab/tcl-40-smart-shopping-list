@@ -125,13 +125,10 @@ export default function List({ token }) {
 
   //onClick handler for delete button
   async function deleteItem(listItem) {
-    // console.log('TOKEN', token)
-    // console.log('listItem.id', listItem)
     const docRef = doc(db, token, listItem.id);
     console.log(docRef);
     const confirm = window.confirm('You sure you want to delete this item?');
     if (confirm) {
-      //delete firebase call :
       await deleteDoc(docRef);
     }
   }
