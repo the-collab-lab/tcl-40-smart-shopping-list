@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Link } from 'react-router-dom';
 import { SiProbot } from 'react-icons/si';
@@ -118,8 +124,16 @@ export default function List({ token }) {
   };
 
   //onClick handler for delete button
-  function deleteItem(item) {
-    window.confirm('You sure you want to delete this item?');
+  async function deleteItem(listItem) {
+    // console.log('TOKEN', token)
+    // console.log('listItem.id', listItem)
+    const docRef = doc(db, token, listItem.id);
+    console.log(docRef);
+    const confirm = window.confirm('You sure you want to delete this item?');
+    if (confirm) {
+      //delete firebase call :
+      await deleteDoc(docRef);
+    }
   }
 
   return (
@@ -170,7 +184,7 @@ export default function List({ token }) {
                     name={listItem.id}
                   />{' '}
                   <label htmlFor={name}>{name}</label>
-                  <button onClick={deleteItem}>Delete</button>
+                  <button onClick={() => deleteItem(listItem)}>Delete</button>
                 </li>
               );
             })}
