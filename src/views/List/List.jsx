@@ -164,7 +164,7 @@ export default function List({ token }) {
                     id={name}
                     name={listItem.id}
                   />{' '}
-                  <label htmlFor={name}>{name}</label>
+                  <label htmlFor={name}>{name}</label> <button>Delete</button>
                 </li>
               );
             })}
