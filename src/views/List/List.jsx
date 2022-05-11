@@ -167,7 +167,8 @@ export default function List({ token }) {
               let badge = '';
               if (
                 timesPurchased === 1 ||
-                (Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2
+                ((Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2 &&
+                  lastPurchasedAt !== null)
               ) {
                 buyIndicator = 'inactive';
               } else if (frequency < 7) {
