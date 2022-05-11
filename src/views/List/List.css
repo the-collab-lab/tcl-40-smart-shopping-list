@@ -25,17 +25,21 @@
 }
 
 .soon {
-  background-color: yellow;
+  background-color: gold;
 }
 
 .kind-of-soon {
-  background-color: blue;
+  background-color: lightblue;
 }
 
 .not-soon {
-  background-color: red;
+  background-color: lightsalmon;
 }
 
 .inactive {
-  background-color: gray;
+  background-color: lightgray;
+}
+
+.badge {
+  background-color: white;
 }

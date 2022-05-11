@@ -192,7 +192,10 @@ export default function List({ token }) {
                     name={listItem.id}
                   />{' '}
                   <label htmlFor={name}>
-                    {name} ({badge})
+                    {name}{' '}
+                    <small className="badge">
+                      <strong>{badge}</strong>
+                    </small>
                   </label>
                 </li>
               );
