@@ -163,97 +163,39 @@ export default function List({ token }) {
                 timesPurchased,
                 lastPurchasedAt,
               } = listItem;
+              let buyIndicator = '';
+              let badge = '';
               if (
-                frequency < 7 &&
-                (Date.now() - lastPurchasedAt) / 86400000 < frequency * 2
-              ) {
-                return (
-                  <li key={index} className="soon">
-                    {' '}
-                    <input
-                      aria-invalid={toggleErr}
-                      aria-describedby="search-err"
-                      aria-errormessage="search-err"
-                      onChange={() => onChange(listItem)}
-                      checked={isActive}
-                      type="checkbox"
-                      id={name}
-                      name={listItem.id}
-                    />{' '}
-                    <label htmlFor={name}>
-                      {name}
-                      {frequency}
-                    </label>
-                  </li>
-                );
-              } else if (
-                frequency >= 7 &&
-                frequency <= 30 &&
-                (Date.now() - lastPurchasedAt) / 86400000 < frequency * 2
-              ) {
-                return (
-                  <li key={index} className="kind-of-soon">
-                    {' '}
-                    <input
-                      aria-invalid={toggleErr}
-                      aria-describedby="search-err"
-                      aria-errormessage="search-err"
-                      onChange={() => onChange(listItem)}
-                      checked={isActive}
-                      type="checkbox"
-                      id={name}
-                      name={listItem.id}
-                    />{' '}
-                    <label htmlFor={name}>
-                      {name}
-                      {frequency}
-                    </label>
-                  </li>
-                );
-              } else if (
                 timesPurchased === 1 ||
                 (Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2
               ) {
-                return (
-                  <li key={index} className="inactive">
-                    {' '}
-                    <input
-                      aria-invalid={toggleErr}
-                      aria-describedby="search-err"
-                      aria-errormessage="search-err"
-                      onChange={() => onChange(listItem)}
-                      checked={isActive}
-                      type="checkbox"
-                      id={name}
-                      name={listItem.id}
-                    />{' '}
-                    <label htmlFor={name}>
-                      {name}
-                      {frequency}
-                    </label>
-                  </li>
-                );
-              } else {
-                return (
-                  <li key={index} className="not-soon">
-                    {' '}
-                    <input
-                      aria-invalid={toggleErr}
-                      aria-describedby="search-err"
-                      aria-errormessage="search-err"
-                      onChange={() => onChange(listItem)}
-                      checked={isActive}
-                      type="checkbox"
-                      id={name}
-                      name={listItem.id}
-                    />{' '}
-                    <label htmlFor={name}>
-                      {name}
-                      {frequency}
-                    </label>
-                  </li>
-                );
+                buyIndicator = 'inactive';
+              } else if (frequency < 7) {
+                buyIndicator = 'soon';
+              } else if (frequency >= 7 && frequency <= 30) {
+                buyIndicator = 'kind-of-soon';
+              } else if (frequency > 30) {
+                buyIndicator = 'not-soon';
               }
+              badge = buyIndicator.replace('-', ' ');
+              return (
+                <li key={index} className={buyIndicator}>
+                  {' '}
+                  <input
+                    aria-invalid={toggleErr}
+                    aria-describedby="search-err"
+                    aria-errormessage="search-err"
+                    onChange={() => onChange(listItem)}
+                    checked={isActive}
+                    type="checkbox"
+                    id={name}
+                    name={listItem.id}
+                  />{' '}
+                  <label htmlFor={name}>
+                    {name} ({badge})
+                  </label>
+                </li>
+              );
             })}
           </ul>
         ) : (
