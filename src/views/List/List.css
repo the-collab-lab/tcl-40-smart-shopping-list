@@ -23,3 +23,26 @@
 .message {
   margin-top: 2rem;
 }
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 30vw;
+}
+
+.checkbox {
+  margin-top: 1em;
+}
+
+.delete-button {
+  margin-left: 1em;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-end; */
+}

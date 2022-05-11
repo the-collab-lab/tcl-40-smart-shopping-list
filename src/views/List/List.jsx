@@ -152,7 +152,7 @@ export default function List({ token }) {
           </label>
         ) : null}
         {data.length ? (
-          <ul>
+          <ul className="list-container">
             {searchError ? (
               <p
                 role="alert"
@@ -168,9 +168,10 @@ export default function List({ token }) {
             {copyOfData.map((listItem, index) => {
               const { name, isActive } = listItem;
               return (
-                <li key={index}>
+                <li className="list-item" key={index}>
                   {' '}
                   <input
+                    className="checkbox"
                     aria-invalid={toggleErr}
                     aria-describedby="search-err"
                     aria-errormessage="search-err"
@@ -181,7 +182,12 @@ export default function List({ token }) {
                     name={listItem.id}
                   />{' '}
                   <label htmlFor={name}>{name}</label>
-                  <button onClick={() => deleteItem(listItem)}>Delete</button>
+                  <button
+                    className="delete-button"
+                    onClick={() => deleteItem(listItem)}
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             })}
