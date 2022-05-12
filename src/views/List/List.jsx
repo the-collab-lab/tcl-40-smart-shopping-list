@@ -127,7 +127,9 @@ export default function List({ token }) {
   async function deleteItem(listItem) {
     const docRef = doc(db, token, listItem.id);
     console.log(docRef);
-    const confirm = window.confirm('You sure you want to delete this item?');
+    const confirm = window.confirm(
+      `Do you want to delete ${listItem.name} from your list?`,
+    );
     if (confirm) {
       await deleteDoc(docRef);
     }
