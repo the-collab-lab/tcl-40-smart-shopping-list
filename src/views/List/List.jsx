@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { Link } from 'react-router-dom';
 import { SiProbot } from 'react-icons/si';
@@ -123,6 +129,18 @@ export default function List({ token }) {
     setSearchInput(value);
   };
 
+  //onClick handler for delete button
+  async function deleteItem(listItem) {
+    const docRef = doc(db, token, listItem.id);
+    console.log(docRef);
+    const confirm = window.confirm(
+      `Do you want to delete ${listItem.name} from your list?`,
+    );
+    if (confirm) {
+      await deleteDoc(docRef);
+    }
+  }
+
   return (
     <section>
       <div className="div">
@@ -142,7 +160,7 @@ export default function List({ token }) {
           </label>
         ) : null}
         {data.length ? (
-          <ul>
+          <ul className="list-container">
             {searchError ? (
               <p
                 role="alert"
@@ -183,6 +201,7 @@ export default function List({ token }) {
                 <li key={index} className={buyIndicator}>
                   {' '}
                   <input
+                    className="checkbox"
                     aria-invalid={toggleErr}
                     aria-describedby="search-err"
                     aria-errormessage="search-err"
@@ -192,6 +211,13 @@ export default function List({ token }) {
                     id={name}
                     name={listItem.id}
                   />{' '}
+                  <label htmlFor={name}>{name}</label>
+                  <button
+                    className="delete-button"
+                    onClick={() => deleteItem(listItem)}
+                  >
+                    Delete
+                  </button>
                   <label htmlFor={name}>
                     {name}{' '}
                     <small className="badge">
