@@ -31,9 +31,15 @@ export default function List({ token }) {
         data.id = doc.id;
         snapshotDocs.push(data);
       });
-      setData(snapshotDocs);
+      const sortedName = snapshotDocs.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      const sortedFrequency = sortedName.sort((a, b) => {
+        return a.frequency - b.frequency;
+      });
+      setData(sortedFrequency);
       //duplicate data from firebase to be manipulated
-      setCopyOfData(snapshotDocs);
+      setCopyOfData(sortedFrequency);
     });
     return () => {
       unsubscribe();
@@ -168,9 +174,31 @@ export default function List({ token }) {
               </p>
             ) : null}
             {copyOfData.map((listItem, index) => {
-              const { name, isActive } = listItem;
+              const {
+                name,
+                isActive,
+                frequency,
+                timesPurchased,
+                lastPurchasedAt,
+              } = listItem;
+              let buyIndicator = '';
+              let badge = '';
+              if (
+                timesPurchased === 1 ||
+                ((Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2 &&
+                  lastPurchasedAt !== null)
+              ) {
+                buyIndicator = 'inactive';
+              } else if (frequency < 7) {
+                buyIndicator = 'soon';
+              } else if (frequency >= 7 && frequency <= 30) {
+                buyIndicator = 'kind-of-soon';
+              } else if (frequency > 30) {
+                buyIndicator = 'not-soon';
+              }
+              badge = buyIndicator.replace('-', ' ');
               return (
-                <li className="list-item" key={index}>
+                <li key={index} className={buyIndicator}>
                   {' '}
                   <input
                     className="checkbox"
@@ -190,6 +218,12 @@ export default function List({ token }) {
                   >
                     Delete
                   </button>
+                  <label htmlFor={name}>
+                    {name}{' '}
+                    <small className="badge">
+                      <strong>{badge}</strong>
+                    </small>
+                  </label>
                 </li>
               );
             })}
