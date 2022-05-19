@@ -6,9 +6,10 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 
-const Home = ({ token, setToken, hasToken, setHasToken }) => {
+const Home = ({ token, setToken, hasToken, setHasToken, tokenList }) => {
   const [joinList, setJoinList] = useState();
   const [formError, setFormError] = useState();
+  const [tokens, setTokens] = useState([]);
 
   const navigate = useNavigate();
 
@@ -16,19 +17,30 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
     setJoinList(e.target.value);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setHasToken(token !== null);
+  //DELETE THIS!
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   setHasToken(token !== null);
+  //   if (hasToken) {
+  //     navigate(`/list`);
+  //   }
+  // }, [hasToken, navigate, setHasToken]);
 
-    if (hasToken) {
-      navigate(`/list`);
-    }
-    
-  }, [hasToken, navigate, setHasToken]);
+  //populate local storage
+  useEffect(() => {
+    localStorage.setItem('tokenList', JSON.stringify(tokens));
+  }, [tokens]);
+
+  //get tokens from local storage
+  // useEffect(() => {
+  //   localStorage.getItem()
+  // }, [tokens]);
 
   const handleCreateToken = () => {
     const newToken = getToken();
-    localStorage.setItem('token', newToken);
+    setTokens([...tokens, newToken]);
+    //DELETE THIS!
+    //localStorage.setItem('token', newToken);
     setToken(newToken);
   };
 
@@ -42,7 +54,7 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
     if (querySnapshot.size > 1) {
       localStorage.setItem('token', joinList);
       setToken(joinList);
-      navigate(`/list`);
+      //navigate(`/list`);
     }
     // otherwise set an error in state we can pass to the join list component
     setFormError(
@@ -58,6 +70,7 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
         handleClick={handleJoinList}
         handleChange={handleChange}
         formError={formError}
+        tokenList={tokenList}
       />
     </div>
   );

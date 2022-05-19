@@ -7,6 +7,9 @@ import Home from './views/Home/Home.jsx';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [tokenList, setTokenList] = useState(
+    JSON.parse(localStorage.getItem('tokenList')) || [],
+  );
   const [hasToken, setHasToken] = useState(token !== null);
 
   return (
@@ -20,6 +23,7 @@ function App() {
               setToken={setToken}
               hasToken={hasToken}
               setHasToken={setHasToken}
+              tokenList={tokenList}
             />
           }
         />
