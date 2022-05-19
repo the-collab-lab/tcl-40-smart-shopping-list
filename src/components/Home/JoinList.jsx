@@ -19,14 +19,22 @@ const JoinList = ({
         <input
           id="share-token"
           type="text"
+          list="token-list"
           placeholder="three word token"
           defaultValue={token}
           onChange={handleChange}
         />
+        {/* map over list of tokens, display each as an option in datalist */}
         <datalist id="token-list">
-          {tokenList.map((token, index) => {
-            return <option key={index}>{token}</option>;
-          })}
+          {tokenList
+            ? tokenList.map((token, index) => {
+                return (
+                  <option key={index} value={token}>
+                    {token}
+                  </option>
+                );
+              })
+            : null}
         </datalist>
       </div>
       <button onClick={handleClick}>Join an existing list</button>
