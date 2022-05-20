@@ -19,11 +19,6 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setHasToken(token !== null);
-
-    if (hasToken) {
-      navigate(`/list`);
-    }
-    
   }, [hasToken, navigate, setHasToken]);
 
   const handleCreateToken = () => {
