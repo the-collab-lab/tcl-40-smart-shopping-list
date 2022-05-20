@@ -49,6 +49,9 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
         'This token does not match an existing shopping list. Please check your input and try again.',
       );
     }
+    //add active token the user typed to list of tokens
+
+    addTokenToLocalStorage(activeToken);
   };
 
   return (
