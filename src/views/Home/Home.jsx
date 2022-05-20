@@ -22,7 +22,7 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
     addTokenToLocalStorage(newToken);
   };
 
-  //add token to local storage
+  // add token to local storage
   const addTokenToLocalStorage = (token) => {
     const tokens = [...tokenList, token];
     localStorage.setItem('tokenList', JSON.stringify(tokens));
@@ -44,7 +44,8 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
       const q = query(collection(db, activeToken));
       //then we take a snapshot of the results by calling getDocs() on our query
       const querySnapshot = await getDocs(q);
-      if (querySnapshot.size > 1 && !tokenList.includes(activeToken)) {
+      console.log(querySnapshot.size);
+      if (querySnapshot.size >= 1 && !tokenList.includes(activeToken)) {
         addTokenToLocalStorage(activeToken);
       } else {
         setFormError(
