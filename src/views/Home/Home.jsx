@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getToken } from '@the-collab-lab/shopping-list-utils';
-import { useNavigate } from 'react-router-dom';
 import { db } from '../../lib/firebase';
 import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 
 const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
-  // const [joinList, setJoinList] = useState();
   const [formError, setFormError] = useState();
   const [tokens, setTokens] = useState([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem('token', activeToken);
@@ -44,14 +40,11 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   };
 
   const handleJoinList = async () => {
-    try {
-      //first we query the firebase database with the input token
-      const q = query(collection(db, activeToken));
-      //then we take a snapshot of the results by calling getDocs() on our query
-      const querySnapshot = await getDocs(q);
-    } catch (error) {
-      console.log(error);
-      // otherwise set an error in state we can pass to the join list component
+    //first we query the firebase database with the input token
+    const q = query(collection(db, activeToken));
+    //then we take a snapshot of the results by calling getDocs() on our query
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.length) {
       setFormError(
         'This token does not match an existing shopping list. Please check your input and try again.',
       );
@@ -62,7 +55,7 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
     <div>
       <CreateList newToken={handleCreateToken} />
       <JoinList
-        // token={token}
+        token={activeToken}
         handleClick={handleJoinList}
         handleChange={handleChange}
         formError={formError}
