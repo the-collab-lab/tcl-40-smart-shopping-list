@@ -6,14 +6,9 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 
-//const Home = ({ token, setToken, hasToken, setHasToken }) => {
 const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
-  //const [activeToken, setActiveToken] = useState(localStorage.getItem('token'));
-  const [joinList, setJoinList] = useState();
+  // const [joinList, setJoinList] = useState();
   const [formError, setFormError] = useState();
-  // const [tokenList, setTokenList] = useState(
-  //   JSON.parse(localStorage.getItem('tokenList')) || [],
-  // );
   const [tokens, setTokens] = useState([]);
 
   const navigate = useNavigate();
@@ -23,8 +18,6 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   }, [activeToken]);
 
   const handleChange = (e) => {
-    console.log('inside join list');
-    //setJoinList(e.target.value);
     setActiveToken(e.target.value);
   };
 
@@ -37,7 +30,6 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
 
   //add token to local storage
   const addTokenToLocalStorage = (token) => {
-    console.log(tokenList);
     const tokens = [...tokenList, token];
     localStorage.setItem('tokenList', JSON.stringify(tokens));
     getTokenListFromLocalStorage();
@@ -53,16 +45,10 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
 
   const handleJoinList = async () => {
     try {
-      //console.log('joinList', joinList);
       //first we query the firebase database with the input token
-      //const q = query(collection(db, joinList));
       const q = query(collection(db, activeToken));
       //then we take a snapshot of the results by calling getDocs() on our query
       const querySnapshot = await getDocs(q);
-      //localStorage.setItem('token', joinList);
-      console.log('QUERY SNAPSHOT', querySnapshot.size);
-      console.log('sent to list view');
-      //console.log(joinList);
     } catch (error) {
       console.log(error);
       // otherwise set an error in state we can pass to the join list component

@@ -6,15 +6,10 @@ import List from './views/List/List.jsx';
 import Home from './views/Home/Home.jsx';
 
 function App() {
-  //const [token, setToken] = useState(localStorage.getItem('token'));
-  //const [hasToken, setHasToken] = useState(token !== null);
   const [activeToken, setActiveToken] = useState(localStorage.getItem('token'));
   const [tokenList, setTokenList] = useState(
     JSON.parse(localStorage.getItem('tokenList')) || [],
   );
-  // useEffect(() => {
-
-  // }, [token])
 
   return (
     <BrowserRouter>
@@ -23,10 +18,6 @@ function App() {
           path="/"
           element={
             <Home
-              //token={token}
-              //setToken={setToken}
-              //hasToken={hasToken}
-              //setHasToken={setHasToken}
               activeToken={activeToken}
               setActiveToken={setActiveToken}
               tokenList={tokenList}
@@ -34,8 +25,8 @@ function App() {
             />
           }
         />
-        <Route path="/list" element={<List />} />
-        <Route path="/additem" element={<AddItem />} />
+        <Route path="/list" element={<List token={activeToken} />} />
+        <Route path="/additem" element={<AddItem token={activeToken} />} />
       </Routes>
     </BrowserRouter>
   );

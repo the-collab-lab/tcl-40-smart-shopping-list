@@ -24,6 +24,7 @@ export default function List({ token }) {
   const [toggleErr, setToggleErr] = useState(false);
 
   useEffect(() => {
+    console.log(token);
     const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
       const snapshotDocs = [];
       snapshot.forEach((doc) => {
