@@ -6,7 +6,9 @@ import List from './views/List/List.jsx';
 import Home from './views/Home/Home.jsx';
 
 function App() {
-  const [activeToken, setActiveToken] = useState(localStorage.getItem('token'));
+  const [activeToken, setActiveToken] = useState(
+    localStorage.getItem('token') || '',
+  );
   const [tokenList, setTokenList] = useState(
     JSON.parse(localStorage.getItem('tokenList')) || [],
   );

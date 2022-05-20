@@ -7,7 +7,6 @@ import JoinList from '../../components/Home/JoinList';
 
 const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   const [formError, setFormError] = useState();
-  const [tokens, setTokens] = useState([]);
 
   useEffect(() => {
     localStorage.setItem('token', activeToken);
@@ -20,7 +19,6 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   const handleCreateToken = () => {
     const newToken = getToken();
     setActiveToken(newToken);
-    //setTokens([...tokens, newToken]);
     addTokenToLocalStorage(newToken);
   };
 
@@ -41,26 +39,20 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
 
   const handleJoinList = async () => {
     //check for valid input
-    if (activeToken !== '') {
+    if (activeToken) {
       //first we query the firebase database with the input token
       const q = query(collection(db, activeToken));
       //then we take a snapshot of the results by calling getDocs() on our query
       const querySnapshot = await getDocs(q);
-      if (!querySnapshot.length) {
+      if (querySnapshot.size > 1 && !tokenList.includes(activeToken)) {
+        addTokenToLocalStorage(activeToken);
+      } else {
         setFormError(
           'This token does not match an existing shopping list. Please check your input and try again.',
         );
       }
     }
-    //console.log('active token is empty!');
   };
-
-  // const checkShareTokenInput = () => {
-  //   if (activeToken === "" ||  null) {
-  //     setFormError('Token name cannot be blank!');
-  //     return false;
-  //   }
-  // }
 
   return (
     <div>
