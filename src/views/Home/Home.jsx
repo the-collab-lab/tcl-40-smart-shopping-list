@@ -20,7 +20,7 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   const handleCreateToken = () => {
     const newToken = getToken();
     setActiveToken(newToken);
-    setTokens([...tokens, newToken]);
+    //setTokens([...tokens, newToken]);
     addTokenToLocalStorage(newToken);
   };
 
@@ -40,19 +40,27 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   };
 
   const handleJoinList = async () => {
-    //first we query the firebase database with the input token
-    const q = query(collection(db, activeToken));
-    //then we take a snapshot of the results by calling getDocs() on our query
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.length) {
-      setFormError(
-        'This token does not match an existing shopping list. Please check your input and try again.',
-      );
+    //check for valid input
+    if (activeToken !== '') {
+      //first we query the firebase database with the input token
+      const q = query(collection(db, activeToken));
+      //then we take a snapshot of the results by calling getDocs() on our query
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.length) {
+        setFormError(
+          'This token does not match an existing shopping list. Please check your input and try again.',
+        );
+      }
     }
-    //add active token the user typed to list of tokens if its not already there
-
-    addTokenToLocalStorage(activeToken);
+    //console.log('active token is empty!');
   };
+
+  // const checkShareTokenInput = () => {
+  //   if (activeToken === "" ||  null) {
+  //     setFormError('Token name cannot be blank!');
+  //     return false;
+  //   }
+  // }
 
   return (
     <div>
