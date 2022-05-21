@@ -8,7 +8,9 @@ const CreateList = (props) => {
       {/* <NavLink to="/list">
         <button onClick={props.newToken}>Create a new list</button>
       </NavLink> */}
-      <button onClick={props.newToken}>Create a new list</button>
+      <button onClick={props.newToken}>Create a new token</button>
+      {/* if  */}
+      {/* <NavLink to="/list">Go to list</NavLink> */}
     </div>
   );
 };
