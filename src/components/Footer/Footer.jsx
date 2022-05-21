@@ -5,9 +5,9 @@ import './Footer.css';
 export default function Footer() {
   return (
     <footer className="footer">
-      {/* <NavLink to="/" className="navLinks btn" >
+      <NavLink to="/" className="navLinks btn">
         Home
-      </NavLink> */}
+      </NavLink>
       <NavLink to="/list" className="navLinks btn">
         List
       </NavLink>
