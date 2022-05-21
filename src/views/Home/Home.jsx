@@ -44,14 +44,20 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
       const q = query(collection(db, activeToken));
       //then we take a snapshot of the results by calling getDocs() on our query
       const querySnapshot = await getDocs(q);
-      console.log(querySnapshot.size);
+      console.log(querySnapshot.size, activeToken);
+      // if the query returns a found list and the size is greater than one its an existing list and should be added to local storage
+      //if the query returns a found list and the size is equal to one
       if (querySnapshot.size >= 1 && !tokenList.includes(activeToken)) {
         addTokenToLocalStorage(activeToken);
-      } else {
+      }
+      //if the size is less than 1, either theres no list attached to that token yet or the user entered an invalid token
+      if (querySnapshot.size < 1) {
         setFormError(
           'This token does not match an existing shopping list. Please check your input and try again.',
         );
       }
+    } else {
+      setFormError('Token cannot be blank!');
     }
   };
 

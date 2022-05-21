@@ -27,7 +27,10 @@ function App() {
             />
           }
         />
-        <Route path="/list" element={<List token={activeToken} />} />
+        <Route
+          path="/list"
+          element={<List token={activeToken} tokenList={tokenList} />}
+        />
         <Route path="/additem" element={<AddItem token={activeToken} />} />
       </Routes>
     </BrowserRouter>
