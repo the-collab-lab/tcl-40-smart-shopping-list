@@ -12,6 +12,7 @@ import { SiProbot } from 'react-icons/si';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 import '../../App.css';
 import './List.css';
+import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 export default function List({ token }) {
@@ -144,6 +145,7 @@ export default function List({ token }) {
   return (
     <section>
       <div className="div">
+        <Header />
         {data.length > 1 ? (
           <label htmlFor="search">
             Search List:
@@ -230,10 +232,10 @@ export default function List({ token }) {
           </ul>
         ) : (
           <>
-            <h1>Smart Shopping List</h1>
+            {/* <h1>Smart Shopping List</h1>
             <div className="icons">
               <SiProbot className="icon" />
-            </div>
+            </div> */}
             <p className="message">Your list is empty. Please add something.</p>
             <Link to="/additem" className="btn add-btn">
               Add Item
