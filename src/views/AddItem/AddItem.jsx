@@ -87,8 +87,11 @@ export default function AddItem({ token }) {
 
   return (
     <div className="addItemContainer">
+      <span className="userMessage">{error}</span>
       <form onSubmit={handleSubmit} className="addItemForm">
-        <label htmlFor="name">Item Name</label>
+        <label htmlFor="name">
+          <strong>Item Name</strong>
+        </label>
         <input
           type="text"
           id="name"
@@ -97,11 +100,13 @@ export default function AddItem({ token }) {
           name="name"
         />
 
-        <fieldset>
-          <legend>How soon will you need to re-purchase this item?</legend>
-          <label htmlFor="7">
-            Soon (in the next 7 days)
+        <fieldset className="freqContainer">
+          <legend>
+            <strong>How soon will you need to purchase this item again?</strong>
+          </legend>
+          <label className="freqLabel" htmlFor="7">
             <input
+              className="freqInput"
               type="radio"
               name="frequency"
               value="7"
@@ -109,10 +114,11 @@ export default function AddItem({ token }) {
               checked={frequency === '7'}
               onChange={handleInput}
             />
+            Soon
           </label>
-          <label htmlFor="14">
-            Kind of Soon (in the next 14 days)
+          <label className="freqLabel" htmlFor="14">
             <input
+              className="freqInput"
               type="radio"
               name="frequency"
               value="14"
@@ -120,10 +126,11 @@ export default function AddItem({ token }) {
               checked={frequency === '14'}
               onChange={handleInput}
             />
+            Kind of Soon
           </label>
-          <label htmlFor="30">
-            Not Soon (in the next 30 days)
+          <label className="freqLabel" htmlFor="30">
             <input
+              className="freqInput"
               type="radio"
               name="frequency"
               value="30"
@@ -131,11 +138,13 @@ export default function AddItem({ token }) {
               checked={frequency === '30'}
               onChange={handleInput}
             />
+            Not soon
           </label>
         </fieldset>
-        <button type="submit">ADD</button>
+        <button type="submit" className="addButton">
+          Add to List
+        </button>
       </form>
-      <span className="userMessage">{error}</span>
       <Footer />
     </div>
   );

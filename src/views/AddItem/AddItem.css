@@ -3,25 +3,62 @@
   flex-direction: column;
   height: 100vh;
   justify-content: flex-end;
-  align-items: stretch;
+  align-items: center;
   font-family: var(--fontBody);
+  background-color: var(--white);
+  color: var(--darkpurple);
 }
 
 .addItemForm {
-  border: 1px solid black;
-  margin-bottom: 20vw;
-}
-
-fieldset {
   display: flex;
   flex-direction: column;
-  border: 0;
+  align-items: center;
+  padding: 2%;
+  margin-bottom: 20vw;
+  font-size: 35%;
+  width: 30vw;
 }
 
-.addItemForm input {
+.freqContainer {
+  display: flex;
+  flex-direction: row;
+  border: 0;
+  margin-top: 15%;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.freqContainer legend {
+  margin-bottom: 2.5em;
+}
+
+.freqLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 2%; */
   cursor: pointer;
+  width: 10em;
+}
+
+.freqInput:checked {
+  accent-color: var(--orange);
 }
 
 .userMessage {
-  background-color: aqua;
+  color: var(--teal);
+  font-weight: 900;
+  /* background-color: var(--teal); */
+  padding: 2em;
+}
+
+.addButton {
+  padding: 0.35rem 0.45rem;
+  display: block;
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  background-color: var(--orange);
+  font-size: 0.55rem;
+  margin: 2em 0em;
 }
