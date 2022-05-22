@@ -5,6 +5,7 @@ import { db } from '../../lib/firebase';
 import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
+import Header from '../../components/Header/Header.jsx';
 
 const Home = ({ token, setToken, hasToken, setHasToken }) => {
   const [joinList, setJoinList] = useState();
@@ -23,7 +24,6 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
     if (hasToken) {
       navigate(`/list`);
     }
-    
   }, [hasToken, navigate, setHasToken]);
 
   const handleCreateToken = () => {
@@ -52,6 +52,7 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
 
   return (
     <div>
+      <Header />
       <CreateList newToken={handleCreateToken} />
       <JoinList
         token={token}
