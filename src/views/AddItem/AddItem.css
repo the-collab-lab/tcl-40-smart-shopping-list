@@ -1,0 +1,27 @@
+.addItemContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-end;
+  align-items: stretch;
+  font-family: var(--fontBody);
+}
+
+.addItemForm {
+  border: 1px solid black;
+  margin-bottom: 20vw;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+}
+
+.addItemForm input {
+  cursor: pointer;
+}
+
+.userMessage {
+  background-color: aqua;
+}

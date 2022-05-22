@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc, onSnapshot } from 'firebase/firestore';
 import Footer from '../../components/Footer/Footer';
+import '../../App.css';
+import './AddItem.css';
 
 const INITIAL_STATE = {
   name: '',
@@ -84,8 +86,8 @@ export default function AddItem({ token }) {
   const { name, frequency } = listItem;
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="addItemContainer">
+      <form onSubmit={handleSubmit} className="addItemForm">
         <label htmlFor="name">Item Name</label>
         <input
           type="text"
@@ -94,39 +96,46 @@ export default function AddItem({ token }) {
           value={name}
           name="name"
         />
-        <span>{error}</span>
+
         <fieldset>
-          <legend>Frequency</legend>
-          <label htmlFor="7">Soon</label>
-          <input
-            type="radio"
-            name="frequency"
-            value="7"
-            id="7"
-            checked={frequency === '7'}
-            onChange={handleInput}
-          />
-          <label htmlFor="14">Kind of Soon</label>
-          <input
-            type="radio"
-            name="frequency"
-            value="14"
-            id="14"
-            checked={frequency === '14'}
-            onChange={handleInput}
-          />
-          <label htmlFor="30">Not Soon</label>
-          <input
-            type="radio"
-            name="frequency"
-            value="30"
-            id="30"
-            checked={frequency === '30'}
-            onChange={handleInput}
-          />
+          <legend>How soon will you need to re-purchase this item?</legend>
+          <label htmlFor="7">
+            Soon (in the next 7 days)
+            <input
+              type="radio"
+              name="frequency"
+              value="7"
+              id="7"
+              checked={frequency === '7'}
+              onChange={handleInput}
+            />
+          </label>
+          <label htmlFor="14">
+            Kind of Soon (in the next 14 days)
+            <input
+              type="radio"
+              name="frequency"
+              value="14"
+              id="14"
+              checked={frequency === '14'}
+              onChange={handleInput}
+            />
+          </label>
+          <label htmlFor="30">
+            Not Soon (in the next 30 days)
+            <input
+              type="radio"
+              name="frequency"
+              value="30"
+              id="30"
+              checked={frequency === '30'}
+              onChange={handleInput}
+            />
+          </label>
         </fieldset>
-        <button type="submit">Add Item</button>
+        <button type="submit">ADD</button>
       </form>
+      <span className="userMessage">{error}</span>
       <Footer />
     </div>
   );
