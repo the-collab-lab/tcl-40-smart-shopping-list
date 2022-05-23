@@ -5,8 +5,11 @@
   justify-content: flex-end;
   align-items: center;
   font-family: var(--fontBody);
-  background-color: var(--white);
   color: var(--darkpurple);
+}
+
+input {
+  font-size: 5%;
 }
 
 .addItemForm {
