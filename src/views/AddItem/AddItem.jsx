@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   timesPurchased: 0,
 };
 
-export default function AddItem({ token }) {
+export default function AddItem({ token, addTokenToLocalStorage }) {
   const [listItem, setListItem] = useState(INITIAL_STATE);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
@@ -75,6 +75,7 @@ export default function AddItem({ token }) {
     try {
       await addDoc(collection(db, token), listItem);
       //add token to local storage here?
+      addTokenToLocalStorage(token);
     } catch (e) {
       console.error(e);
     }

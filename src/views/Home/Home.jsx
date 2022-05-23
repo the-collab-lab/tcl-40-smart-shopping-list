@@ -6,44 +6,28 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 
-const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
+const Home = ({
+  activeToken,
+  setActiveToken,
+  tokenList,
+  addTokenToLocalStorage,
+}) => {
   const [formError, setFormError] = useState();
-
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   console.log('inside useEffect', activeToken);
-  //   //localStorage.setItem('token', activeToken);
-
-  // }, [activeToken]);
 
   const handleChange = (e) => {
     setActiveToken(e.target.value);
+    localStorage.setItem('token', e.target.value);
   };
 
   const handleCreateToken = () => {
     const newToken = getToken();
     console.log(newToken);
     setActiveToken(newToken);
-    addTokenToLocalStorage(newToken);
+    localStorage.setItem('token', newToken);
+    //addTokenToLocalStorage(newToken);
     navigate('/additem');
     //add a dummy item to the list so it will exist
-  };
-
-  // add token to local storage
-  const addTokenToLocalStorage = (token) => {
-    const tokens = [...tokenList, token];
-    localStorage.setItem('token', token);
-    localStorage.setItem('tokenList', JSON.stringify(tokens));
-    getTokenListFromLocalStorage();
-  };
-
-  //get tokens from local storage
-  const getTokenListFromLocalStorage = () => {
-    const tokensFromLocalStorage = JSON.parse(
-      localStorage.getItem('tokenList'),
-    );
-    setTokenList([...tokensFromLocalStorage]);
   };
 
   const handleJoinList = async () => {

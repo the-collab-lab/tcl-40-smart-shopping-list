@@ -13,6 +13,22 @@ function App() {
     JSON.parse(localStorage.getItem('tokenList')) || [],
   );
 
+  // add token to local storage
+  const addTokenToLocalStorage = (token) => {
+    const tokens = [...tokenList, token];
+    localStorage.setItem('token', token);
+    localStorage.setItem('tokenList', JSON.stringify(tokens));
+    getTokenListFromLocalStorage();
+  };
+
+  //populate token array from local storage
+  const getTokenListFromLocalStorage = () => {
+    const tokensFromLocalStorage = JSON.parse(
+      localStorage.getItem('tokenList'),
+    );
+    setTokenList([...tokensFromLocalStorage]);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,6 +40,8 @@ function App() {
               setActiveToken={setActiveToken}
               tokenList={tokenList}
               setTokenList={setTokenList}
+              addTokenToLocalStorage={addTokenToLocalStorage}
+              getTokenListFromLocalStorage={getTokenListFromLocalStorage}
             />
           }
         />
@@ -31,7 +49,15 @@ function App() {
           path="/list"
           element={<List token={activeToken} tokenList={tokenList} />}
         />
-        <Route path="/additem" element={<AddItem token={activeToken} />} />
+        <Route
+          path="/additem"
+          element={
+            <AddItem
+              token={activeToken}
+              addTokenToLocalStorage={addTokenToLocalStorage}
+            />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
