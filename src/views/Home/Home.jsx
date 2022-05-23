@@ -11,10 +11,11 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log('inside useEffect', activeToken);
-    localStorage.setItem('token', activeToken);
-  }, [activeToken]);
+  // useEffect(() => {
+  //   console.log('inside useEffect', activeToken);
+  //   //localStorage.setItem('token', activeToken);
+
+  // }, [activeToken]);
 
   const handleChange = (e) => {
     setActiveToken(e.target.value);
@@ -25,12 +26,14 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
     console.log(newToken);
     setActiveToken(newToken);
     addTokenToLocalStorage(newToken);
-    //navigate('/list');
+    navigate('/additem');
+    //add a dummy item to the list so it will exist
   };
 
   // add token to local storage
   const addTokenToLocalStorage = (token) => {
     const tokens = [...tokenList, token];
+    localStorage.setItem('token', token);
     localStorage.setItem('tokenList', JSON.stringify(tokens));
     getTokenListFromLocalStorage();
   };

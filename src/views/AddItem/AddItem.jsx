@@ -17,7 +17,7 @@ export default function AddItem({ token }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
+    const unsubscribe = onSnapshot(collection(db, 'token'), (snapshot) => {
       const snapshotDocs = [];
       snapshot.forEach((doc) => snapshotDocs.push(doc.data()));
       setData(snapshotDocs);
