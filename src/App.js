@@ -55,6 +55,7 @@ function App() {
             <AddItem
               token={activeToken}
               addTokenToLocalStorage={addTokenToLocalStorage}
+              tokenList={tokenList}
             />
           }
         />

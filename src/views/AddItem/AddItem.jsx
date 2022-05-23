@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   timesPurchased: 0,
 };
 
-export default function AddItem({ token, addTokenToLocalStorage }) {
+export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
   const [listItem, setListItem] = useState(INITIAL_STATE);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
@@ -74,8 +74,10 @@ export default function AddItem({ token, addTokenToLocalStorage }) {
     listItem.frequency = parseInt(frequency, 10);
     try {
       await addDoc(collection(db, token), listItem);
-      //add token to local storage here?
-      addTokenToLocalStorage(token);
+      //add token to local storage on if its not already in the array
+      if (!tokenList.includes(token)) {
+        addTokenToLocalStorage(token);
+      }
     } catch (e) {
       console.error(e);
     }
