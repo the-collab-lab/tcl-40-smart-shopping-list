@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getToken } from '@the-collab-lab/shopping-list-utils';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../lib/firebase';
@@ -25,9 +25,7 @@ const Home = ({
     console.log(newToken);
     setActiveToken(newToken);
     localStorage.setItem('token', newToken);
-    //addTokenToLocalStorage(newToken);
     navigate('/additem');
-    //add a dummy item to the list so it will exist
   };
 
   const handleJoinList = async () => {
