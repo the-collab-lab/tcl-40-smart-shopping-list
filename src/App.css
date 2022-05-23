@@ -9,10 +9,13 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* justify-content: flex-end; */
   text-align: center;
   color: black;
   margin: 0;
+}
+
+h1 {
+  font-size: 2em;
 }
 
 .btn {
