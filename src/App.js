@@ -39,9 +39,7 @@ function App() {
               activeToken={activeToken}
               setActiveToken={setActiveToken}
               tokenList={tokenList}
-              setTokenList={setTokenList}
               addTokenToLocalStorage={addTokenToLocalStorage}
-              getTokenListFromLocalStorage={getTokenListFromLocalStorage}
             />
           }
         />

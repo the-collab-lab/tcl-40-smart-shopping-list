@@ -12,7 +12,8 @@ const Home = ({
   tokenList,
   addTokenToLocalStorage,
 }) => {
-  const [formError, setFormError] = useState();
+  const [formError, setFormError] = useState('');
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,7 +23,6 @@ const Home = ({
 
   const handleCreateToken = () => {
     const newToken = getToken();
-    console.log(newToken);
     setActiveToken(newToken);
     localStorage.setItem('token', newToken);
     navigate('/additem');
@@ -35,7 +35,6 @@ const Home = ({
       const q = query(collection(db, activeToken));
       //then we take a snapshot of the results by calling getDocs() on our query
       const querySnapshot = await getDocs(q);
-      console.log(querySnapshot.size, activeToken);
       // if the query returns an existing list and the active token is not already in the token array
       if (querySnapshot.size >= 1 && !tokenList.includes(activeToken)) {
         addTokenToLocalStorage(activeToken);

@@ -76,6 +76,7 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
       await addDoc(collection(db, token), listItem);
       //add token to local storage on if its not already in the array
       if (!tokenList.includes(token)) {
+        localStorage.setItem('token', token);
         addTokenToLocalStorage(token);
       }
     } catch (e) {
