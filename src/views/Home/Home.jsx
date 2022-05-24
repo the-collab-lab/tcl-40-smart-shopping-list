@@ -36,16 +36,13 @@ const Home = ({
       //then we take a snapshot of the results by calling getDocs() on our query
       const querySnapshot = await getDocs(q);
       console.log(querySnapshot.size, activeToken);
-      // if the query returns a found list and the size is greater than one its an existing list and should be added to local storage
-      //if the query returns a found list and the size is equal to one
+      // if the query returns an existing list and the active token is not already in the token array
       if (querySnapshot.size >= 1 && !tokenList.includes(activeToken)) {
         addTokenToLocalStorage(activeToken);
         navigate('/list');
       } else if (querySnapshot.size >= 1) {
         navigate('/list');
-      }
-      //if the size is less than 1, either theres no list attached to that token yet or the user entered an invalid token
-      else if (querySnapshot.size < 1) {
+      } else if (querySnapshot.size < 1) {
         setFormError(
           'This token does not match an existing shopping list. Please check your input and try again.',
         );

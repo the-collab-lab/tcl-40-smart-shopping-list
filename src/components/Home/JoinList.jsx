@@ -18,7 +18,7 @@ const JoinList = ({
         <label htmlFor="share-token">Share Token:</label>
         <input
           id="share-token"
-          type="text"
+          type="search"
           list="token-list"
           placeholder="three word token"
           defaultValue={token}
