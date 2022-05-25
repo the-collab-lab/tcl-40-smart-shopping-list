@@ -1,6 +1,12 @@
 import React from 'react';
 
-const JoinList = ({ token, handleClick, handleChange, formError }) => {
+const JoinList = ({
+  token,
+  handleClick,
+  handleChange,
+  formError,
+  tokenList,
+}) => {
   return (
     <div>
       {formError ? (
@@ -11,11 +17,25 @@ const JoinList = ({ token, handleClick, handleChange, formError }) => {
       <div>
         <label htmlFor="share-token">Share Token:</label>
         <input
+          id="share-token"
           type="text"
+          list="token-list"
           placeholder="three word token"
           defaultValue={token}
           onChange={handleChange}
         />
+        {/* map over list of tokens, display each as an option in datalist */}
+        <datalist id="token-list">
+          {tokenList
+            ? tokenList.map((token, index) => {
+                return (
+                  <option key={index} value={token}>
+                    {token}
+                  </option>
+                );
+              })
+            : null}
+        </datalist>
       </div>
       <button onClick={handleClick}>Join an existing list</button>
     </div>

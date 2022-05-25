@@ -7,47 +7,68 @@ import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 import Header from '../../components/Header/Header.jsx';
 
-const Home = ({ token, setToken, hasToken, setHasToken }) => {
-  const [joinList, setJoinList] = useState();
+const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   const [formError, setFormError] = useState();
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setJoinList(e.target.value);
-  };
-
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    setHasToken(token !== null);
+    console.log('inside useEffect', activeToken);
+    localStorage.setItem('token', activeToken);
+  }, [activeToken]);
 
-    if (hasToken) {
-      navigate(`/list`);
-    }
-  }, [hasToken, navigate, setHasToken]);
+  const handleChange = (e) => {
+    setActiveToken(e.target.value);
+  };
 
   const handleCreateToken = () => {
     const newToken = getToken();
-    localStorage.setItem('token', newToken);
-    setToken(newToken);
+    console.log(newToken);
+    setActiveToken(newToken);
+    addTokenToLocalStorage(newToken);
+    //navigate('/list');
+  };
+
+  // add token to local storage
+  const addTokenToLocalStorage = (token) => {
+    const tokens = [...tokenList, token];
+    localStorage.setItem('tokenList', JSON.stringify(tokens));
+    getTokenListFromLocalStorage();
+  };
+
+  //get tokens from local storage
+  const getTokenListFromLocalStorage = () => {
+    const tokensFromLocalStorage = JSON.parse(
+      localStorage.getItem('tokenList'),
+    );
+    setTokenList([...tokensFromLocalStorage]);
   };
 
   const handleJoinList = async () => {
-    //first we query the firebase database with the input token
-    const q = query(collection(db, joinList));
-    //then we take a snapshot of the results by calling getDocs() on our query
-    const querySnapshot = await getDocs(q);
-    // console.log('QUERY SNAPSHOT', querySnapshot.size)
-    // if the snapshot.size is greater than one, we can assume it's a valid list, set the token in state, and navigate the user to the list view
-    if (querySnapshot.size > 1) {
-      localStorage.setItem('token', joinList);
-      setToken(joinList);
-      navigate(`/list`);
+    //check for valid input
+    if (activeToken) {
+      //first we query the firebase database with the input token
+      const q = query(collection(db, activeToken));
+      //then we take a snapshot of the results by calling getDocs() on our query
+      const querySnapshot = await getDocs(q);
+      console.log(querySnapshot.size, activeToken);
+      // if the query returns a found list and the size is greater than one its an existing list and should be added to local storage
+      //if the query returns a found list and the size is equal to one
+      if (querySnapshot.size >= 1 && !tokenList.includes(activeToken)) {
+        addTokenToLocalStorage(activeToken);
+        navigate('/list');
+      } else if (querySnapshot.size >= 1) {
+        navigate('/list');
+      }
+      //if the size is less than 1, either theres no list attached to that token yet or the user entered an invalid token
+      else if (querySnapshot.size < 1) {
+        setFormError(
+          'This token does not match an existing shopping list. Please check your input and try again.',
+        );
+      }
+    } else {
+      setFormError('Token cannot be blank!');
     }
-    // otherwise set an error in state we can pass to the join list component
-    setFormError(
-      'This token does not match an existing shopping list. Please check your input and try again.',
-    );
   };
 
   return (
@@ -55,10 +76,11 @@ const Home = ({ token, setToken, hasToken, setHasToken }) => {
       <Header />
       <CreateList newToken={handleCreateToken} />
       <JoinList
-        token={token}
+        token={activeToken}
         handleClick={handleJoinList}
         handleChange={handleChange}
         formError={formError}
+        tokenList={tokenList}
       />
     </div>
   );

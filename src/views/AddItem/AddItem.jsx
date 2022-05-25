@@ -75,6 +75,7 @@ export default function AddItem({ token }) {
     listItem.frequency = parseInt(frequency, 10);
     try {
       await addDoc(collection(db, token), listItem);
+      //add token to local storage here?
     } catch (e) {
       console.error(e);
     }

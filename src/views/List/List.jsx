@@ -214,18 +214,17 @@ export default function List({ token }) {
                     name={listItem.id}
                   />{' '}
                   <label htmlFor={name}>{name}</label>
+                  <label htmlFor={name}>
+                    <small className="badge">
+                      <strong>{badge}</strong>
+                    </small>
+                  </label>
                   <button
                     className="delete-button"
                     onClick={() => deleteItem(listItem)}
                   >
                     Delete
                   </button>
-                  <label htmlFor={name}>
-                    {name}{' '}
-                    <small className="badge">
-                      <strong>{badge}</strong>
-                    </small>
-                  </label>
                 </li>
               );
             })}
