@@ -12,13 +12,13 @@ const INITIAL_STATE = {
   timesPurchased: 0,
 };
 
-export default function AddItem({ token }) {
+export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
   const [listItem, setListItem] = useState(INITIAL_STATE);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, token), (snapshot) => {
+    const unsubscribe = onSnapshot(collection(db, 'token'), (snapshot) => {
       const snapshotDocs = [];
       snapshot.forEach((doc) => snapshotDocs.push(doc.data()));
       setData(snapshotDocs);
@@ -75,7 +75,11 @@ export default function AddItem({ token }) {
     listItem.frequency = parseInt(frequency, 10);
     try {
       await addDoc(collection(db, token), listItem);
-      //add token to local storage here?
+      //add token to local storage on if its not already in the array
+      if (!tokenList.includes(token)) {
+        localStorage.setItem('token', token);
+        addTokenToLocalStorage(token);
+      }
     } catch (e) {
       console.error(e);
     }
