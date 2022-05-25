@@ -16,9 +16,9 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2%;
-  margin-bottom: 20vw;
-  font-size: 35%;
+  padding: 0.2em;
+  font-size: 0.65em;
+  margin-bottom: 40vw;
   width: 30vw;
 }
 
@@ -26,22 +26,20 @@ input {
   display: flex;
   flex-direction: row;
   border: 0;
-  margin-top: 15%;
-  align-items: flex-start;
-  justify-content: center;
+  margin-top: 1.5em;
 }
 
-.freqContainer legend {
-  margin-bottom: 2.5em;
+.freqContainer legend,
+label {
+  margin-bottom: 0.5em;
 }
 
 .freqLabel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding: 2%; */
   cursor: pointer;
-  width: 10em;
+  width: 6em;
 }
 
 .freqInput:checked {
@@ -51,17 +49,13 @@ input {
 .userMessage {
   color: var(--teal);
   font-weight: 900;
-  /* background-color: var(--teal); */
-  padding: 2em;
+  padding: 1em;
 }
 
 .addButton {
-  padding: 0.35rem 0.45rem;
-  display: block;
   color: var(--white);
   border: none;
-  border-radius: 50px;
   background-color: var(--orange);
-  font-size: 0.55rem;
-  margin: 2em 0em;
+  font-family: var(--fontBody);
+  font-weight: 900;
 }

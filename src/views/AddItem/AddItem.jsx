@@ -141,7 +141,7 @@ export default function AddItem({ token }) {
             Not soon
           </label>
         </fieldset>
-        <button type="submit" className="addButton">
+        <button type="submit" className="addButton btn">
           Add to List
         </button>
       </form>
