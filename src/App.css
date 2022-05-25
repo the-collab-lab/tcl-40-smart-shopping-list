@@ -9,10 +9,13 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: flex-end;
   text-align: center;
   color: black;
   margin: 0;
+}
+
+h1 {
+  font-size: 2em;
 }
 
 .btn {
@@ -28,4 +31,12 @@ body {
 
 .add-btn {
   margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }

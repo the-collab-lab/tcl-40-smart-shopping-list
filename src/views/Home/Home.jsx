@@ -5,6 +5,7 @@ import { db } from '../../lib/firebase';
 import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
+import Header from '../../components/Header/Header.jsx';
 
 const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
   const [formError, setFormError] = useState();
@@ -72,6 +73,7 @@ const Home = ({ activeToken, setActiveToken, tokenList, setTokenList }) => {
 
   return (
     <div>
+      <Header />
       <CreateList newToken={handleCreateToken} />
       <JoinList
         token={activeToken}
