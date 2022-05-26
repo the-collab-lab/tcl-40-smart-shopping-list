@@ -41,13 +41,13 @@ Screenshots or gifs of the final product will eventually go here
 
 ## Developers
 
-<a href="https://github.com/daniel-sj-hong"><img src="https://avatars.githubusercontent.com/u/80491609?v=4" title="Daniel Hong" width="80" height="80">Daniel Hong</a>
-<a href="https://github.com/k-schrattenholzer"><img src="https://avatars.githubusercontent.com/u/54855300?v=4" title="Katie Schrattenholzer" width="80" height="80">Katie Schrattenholzer</a>
-<a href="https://github.com/sparsell"><img src="https://avatars.githubusercontent.com/u/52385888?v=4" title="Sonja Parsell" width="80" height="80">Sonja Parsell</a>
-<a href="https://github.com/artsycoder533"><img src="https://avatars.githubusercontent.com/u/83678228?v=4" title="Natasha Johnson" width="80" height="80">Natasha Johnson</a>
+<a href="https://github.com/daniel-sj-hong"><img src="https://avatars.githubusercontent.com/u/80491609?v=4" title="Daniel Hong" width="80" height="80"></a>
+<a href="https://github.com/k-schrattenholzer"><img src="https://avatars.githubusercontent.com/u/54855300?v=4" title="Katie Schrattenholzer" width="80" height="80"></a>
+<a href="https://github.com/sparsell"><img src="https://avatars.githubusercontent.com/u/52385888?v=4" title="Sonja Parsell" width="80" height="80"></a>
+<a href="https://github.com/artsycoder533"><img src="https://avatars.githubusercontent.com/u/83678228?v=4" title="Natasha Johnson" width="80" height="80"></a>
 
 ## Mentors
 
-<a href="https://github.com/mxmason"><img src="https://avatars.githubusercontent.com/u/13525251?v=4" title="EJ Mason" width="80" height="80">EJ Mason</a>
-<a href="https://github.com/lindseyindev"><img src="https://avatars.githubusercontent.com/u/89806097?v=4" title="Lindsey Dinkel" width="80" height="80">Lindsey Dinkel</a>
-<a href="https://github.com/shiftyp"><img src="https://avatars.githubusercontent.com/u/131928?v=4" title="Ryan Lynch" width="80" height="80">Ryan Lynch</a>
+<a href="https://github.com/mxmason"><img src="https://avatars.githubusercontent.com/u/13525251?v=4" title="EJ Mason" width="80" height="80"></a>
+<a href="https://github.com/lindseyindev"><img src="https://avatars.githubusercontent.com/u/89806097?v=4" title="Lindsey Dinkel" width="80" height="80"></a>
+<a href="https://github.com/shiftyp"><img src="https://avatars.githubusercontent.com/u/131928?v=4" title="Ryan Lynch" width="80" height="80"></a>
