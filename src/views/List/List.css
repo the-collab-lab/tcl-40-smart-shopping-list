@@ -28,21 +28,38 @@
   flex-direction: row;
   list-style-type: none;
   align-items: flex-end;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 30vw;
+  position: relative;
+  padding: 1rem;
+  border-radius: 4px;
+  /* align-items: center; */
+}
+
+.list-item:hover {
 }
 
 .checkbox {
-  margin-top: 1em;
+  /* margin-top: 1em; */
+  transform: scale(2.1);
+  margin-right: 1rem;
 }
 
 .delete-button {
   margin-left: 1em;
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .list-container {
   display: flex;
   flex-direction: column;
+  height: 600px;
+  overflow-y: scroll;
+  gap: 1rem;
+  padding: 1rem;
   /* align-items: flex-end; */
 }
 
@@ -64,4 +81,10 @@
 
 .badge {
   background-color: white;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border-radius: 1rem;
+  padding: 0.05rem 0.25rem;
+  font-size: 0.8rem;
 }

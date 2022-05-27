@@ -9,6 +9,7 @@ import {
 import { db } from '../../lib/firebase';
 import { Link } from 'react-router-dom';
 import { SiProbot } from 'react-icons/si';
+import { FaRegTrashAlt } from 'react-icons/fa';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 import '../../App.css';
 import './List.css';
@@ -200,7 +201,7 @@ export default function List({ token }) {
               }
               badge = buyIndicator.replace('-', ' ');
               return (
-                <li key={index} className={buyIndicator}>
+                <li key={index} className={`list-item ${buyIndicator}`}>
                   {' '}
                   <input
                     className="checkbox"
@@ -215,15 +216,13 @@ export default function List({ token }) {
                   />{' '}
                   <label htmlFor={name}>{name}</label>
                   <label htmlFor={name}>
-                    <small className="badge">
-                      <strong>{badge}</strong>
-                    </small>
+                    <small className="badge">{badge}</small>
                   </label>
                   <button
                     className="delete-button"
                     onClick={() => deleteItem(listItem)}
                   >
-                    Delete
+                    <FaRegTrashAlt />
                   </button>
                 </li>
               );
