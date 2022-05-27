@@ -8,7 +8,9 @@ This app was developed by a group of four junior developers through [The Collab 
 
 ## How does it work?
 
-As a user, you will enter items (e.g., “Greek yogurt” or “Paper towels”) into your list. Each time you buy the item, you mark it as purchased in the list. Over time, the app comes to understand the intervals at which you buy different items. If an item is likely to be due to be bought soon, it rises to the top of the shopping list.
+- As a user, you will enter items (e.g., “Greek yogurt” or “Paper towels”) into your list. Each time you buy the item, you mark it as purchased in the list. Over time, the app comes to understand the intervals at which you buy different items. This is done through a frequency property/counter. The frequency will change depending upon how frequently a user purchases a single item. Then, depending on the frequency, an item will be sorted into intervals of soon, kind of soon, and not soon for when a user will need a certain item again. If an item is likely to be due to be bought soon, it rises to the top of the shopping list.
+- One user can have multiple sets of lists and each list is attached to a token. A token is generated every time a user creates a new list.
+- Users are allowed to join other peoples' lists as long as they have the token to another user's list.
 
 ## Demos of the app:
 
