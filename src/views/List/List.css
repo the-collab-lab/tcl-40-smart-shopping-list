@@ -5,6 +5,9 @@
   justify-content: flex-start;
   height: calc(100vh - 75px);
   gap: 1rem;
+  max-width: 500px;
+  width: 90vw;
+  padding: 0.25rem;
 }
 
 .icons {
@@ -25,15 +28,22 @@
 
 .list-item {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   list-style-type: none;
   align-items: flex-end;
   /* justify-content: space-between; */
-  width: 30vw;
+  /* width: 30vw; */
+  /* max-width: 600px; */
   position: relative;
   padding: 1rem;
   border-radius: 4px;
-  /* align-items: center; */
+  align-items: center;
+  border: 1px solid black;
+  /* box-shadow: -10px 8px 15px -3px rgba(0,0,0,0.1); */
+}
+
+.list-item-name {
+  font-size: 1.2rem;
 }
 
 .list-item:hover {
@@ -41,16 +51,23 @@
 
 .checkbox {
   /* margin-top: 1em; */
-  transform: scale(2.1);
   margin-right: 1rem;
+  width: 44px;
+  height: 44px;
 }
 
 .delete-button {
-  margin-left: 1em;
+  /* margin-left: 1em; */
   background: transparent;
   border: 1px solid transparent;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   cursor: pointer;
+  /* justify-self: flex-end; */
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  color: red;
+  font-weight: bold;
 }
 
 .list-container {
@@ -59,8 +76,22 @@
   height: 600px;
   overflow-y: scroll;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0;
   /* align-items: flex-end; */
+}
+
+.freq-badge,
+.kind-of-soon,
+.not-soon,
+.inactive,
+.soon {
+  background-color: white;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  border-radius: 1rem;
+  padding: 0.05rem 0.25rem;
+  font-size: 0.8rem;
 }
 
 .soon {
@@ -79,12 +110,17 @@
   background-color: lightgray;
 }
 
-.badge {
-  background-color: white;
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  border-radius: 1rem;
-  padding: 0.05rem 0.25rem;
-  font-size: 0.8rem;
+.search {
+  padding: 0.5rem;
+  font-size: 1rem;
+  /* margin-left: 1rem; */
+  width: 100%;
+}
+
+.search-label {
+  font-size: 1.2rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
