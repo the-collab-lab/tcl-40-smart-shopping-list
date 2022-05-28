@@ -9,6 +9,7 @@ import {
 import { db } from '../../lib/firebase';
 import { Link } from 'react-router-dom';
 import { SiProbot } from 'react-icons/si';
+import { FaRegTrashAlt } from 'react-icons/fa';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 import '../../App.css';
 import './List.css';
@@ -147,7 +148,7 @@ export default function List({ token }) {
       <div className="div">
         <Header />
         {data.length > 1 ? (
-          <label htmlFor="search">
+          <label htmlFor="search" className="search-label">
             Search List:
             <input
               title="search your list"
@@ -158,6 +159,7 @@ export default function List({ token }) {
               onChange={filterList}
               value={searchInput || ''}
               placeholder="e.g. potatoes"
+              className="search"
             />
           </label>
         ) : null}
@@ -190,7 +192,7 @@ export default function List({ token }) {
                 ((Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2 &&
                   lastPurchasedAt !== null)
               ) {
-                buyIndicator = 'inactive';
+                buyIndicator = 'overdue';
               } else if (frequency < 7) {
                 buyIndicator = 'soon';
               } else if (frequency >= 7 && frequency <= 30) {
@@ -198,9 +200,9 @@ export default function List({ token }) {
               } else if (frequency > 30) {
                 buyIndicator = 'not-soon';
               }
-              badge = buyIndicator.replace('-', ' ');
+              badge = buyIndicator.replaceAll('-', ' ');
               return (
-                <li key={index} className={buyIndicator}>
+                <li key={index} className={`list-item`}>
                   {' '}
                   <input
                     className="checkbox"
@@ -213,17 +215,17 @@ export default function List({ token }) {
                     id={name}
                     name={listItem.id}
                   />{' '}
-                  <label htmlFor={name}>{name}</label>
+                  <label htmlFor={name} className="list-item-name">
+                    {name}
+                  </label>
                   <label htmlFor={name}>
-                    <small className="badge">
-                      <strong>{badge}</strong>
-                    </small>
+                    <small className={buyIndicator}>{badge}</small>
                   </label>
                   <button
                     className="delete-button"
                     onClick={() => deleteItem(listItem)}
                   >
-                    Delete
+                    <FaRegTrashAlt />
                   </button>
                 </li>
               );

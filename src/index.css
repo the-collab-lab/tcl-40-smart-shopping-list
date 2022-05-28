@@ -5,9 +5,10 @@
 :root {
   --darkpurple: #120310;
   --purple: #22061f;
-  --pink: #63264a;
+  --pink: hsl(325, 45%, 27%);
+  --lightpink: hsl(325, 45%, 47%);
   --teal: #548687;
-  --orange: #f28f3b;
+  --orange: hsl(28, 88%, 49%);
   --white: #f9f8f8;
   --fontHeader: 'Playfair Display', serif;
   --fontBody: 'Source Sans Pro', sans-serif;

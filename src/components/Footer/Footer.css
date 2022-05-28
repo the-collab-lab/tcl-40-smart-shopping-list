@@ -4,7 +4,7 @@
 
 .active {
   font-weight: 800;
-  background-color: blue;
+  background-color: var(--orange);
   color: white;
 }
 
