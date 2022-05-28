@@ -42,6 +42,7 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const checkForErrors = checkforDuplicateItems();
+    console.log(checkForErrors);
     if (checkForErrors) {
       setError('Item already in list!');
       setListItem(INITIAL_STATE);
@@ -53,7 +54,7 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
     }
   };
 
-  const checkforDuplicateItems = async () => {
+  const checkforDuplicateItems = () => {
     //get the value the user typed
     //preserve that value
     //get the whole list from firebase
