@@ -1,0 +1,39 @@
+.div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+  height: calc(100vh - 75px);
+  gap: 1rem;
+  max-width: 500px;
+  width: 90vw;
+  padding: 0.25rem;
+  margin: 0 auto;
+}
+
+h3 {
+  margin: 1rem;
+}
+
+p {
+  margin: 1rem;
+}
+
+.createButton,
+.joinButton {
+  color: var(--white);
+  border: none;
+  background-color: var(--pink);
+  font-family: var(--fontBody);
+  font-weight: 900;
+  padding: 1rem;
+}
+
+.share-token-div {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.share-token-input {
+  padding-right: 0.2rem;
+}
