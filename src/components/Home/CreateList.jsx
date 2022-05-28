@@ -9,6 +9,8 @@ const CreateList = (props) => {
       <button className="createButton" onClick={props.newToken}>
         Create a new token
       </button>
+      <p>Your token will become a list when you add your first item.</p>
+      <p>_______________________________</p>
     </div>
   );
 };
