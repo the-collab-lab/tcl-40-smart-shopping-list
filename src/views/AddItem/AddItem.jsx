@@ -89,9 +89,9 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
   const { name, frequency } = listItem;
 
   return (
-    <div>
-      <Header />
-      <div>
+    <section>
+      <div className="div">
+        <Header />
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Item Name</label>
           <input
@@ -134,8 +134,8 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
           </fieldset>
           <button type="submit">Add Item</button>
         </form>
-        <Footer />
       </div>
-    </div>
+      <Footer />
+    </section>
   );
 }

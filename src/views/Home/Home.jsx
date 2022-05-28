@@ -54,18 +54,20 @@ const Home = ({
   };
 
   return (
-    <div>
-      <Header />
-      <CreateList newToken={handleCreateToken} />
-      <JoinList
-        token={activeToken}
-        handleClick={handleJoinList}
-        handleChange={handleChange}
-        formError={formError}
-        tokenList={tokenList}
-      />
+    <section>
+      <div className="div">
+        <Header />
+        <CreateList newToken={handleCreateToken} />
+        <JoinList
+          token={activeToken}
+          handleClick={handleJoinList}
+          handleChange={handleChange}
+          formError={formError}
+          tokenList={tokenList}
+        />
+      </div>
       <div>{activeToken ? <Footer /> : null}</div>
-    </div>
+    </section>
   );
 };
 
