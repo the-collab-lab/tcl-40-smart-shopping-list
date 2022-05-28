@@ -6,6 +6,7 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 import Header from '../../components/Header/Header.jsx';
+import Footer from '../../components/Footer/Footer.jsx';
 
 const Home = ({
   activeToken,
@@ -63,6 +64,7 @@ const Home = ({
         formError={formError}
         tokenList={tokenList}
       />
+      <div>{activeToken ? <Footer /> : null}</div>
     </div>
   );
 };
