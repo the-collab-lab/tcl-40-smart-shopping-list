@@ -192,7 +192,7 @@ export default function List({ token }) {
                 ((Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2 &&
                   lastPurchasedAt !== null)
               ) {
-                buyIndicator = 'inactive';
+                buyIndicator = 'overdue';
               } else if (frequency < 7) {
                 buyIndicator = 'soon';
               } else if (frequency >= 7 && frequency <= 30) {

@@ -12,6 +12,7 @@ body {
   text-align: center;
   color: black;
   margin: 0;
+  justify-content: center;
 }
 
 h1 {
@@ -24,9 +25,11 @@ h1 {
   padding: 0.5rem;
   margin: 1rem;
   display: block;
-  width: 6rem;
-  color: blue;
-  border: 2px solid blue;
+  width: 7rem;
+  color: var(--orange);
+  border: 2px solid var(--orange);
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 
 .add-btn {
