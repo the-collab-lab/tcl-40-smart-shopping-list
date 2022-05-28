@@ -53,7 +53,7 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
     }
   };
 
-  const checkforDuplicateItems = () => {
+  const checkforDuplicateItems = async () => {
     //get the value the user typed
     //preserve that value
     //get the whole list from firebase
