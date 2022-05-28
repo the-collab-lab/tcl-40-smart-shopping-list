@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../App.css';
+import './Home.css';
 
 const JoinList = ({
   token,
@@ -12,12 +14,18 @@ const JoinList = ({
       {formError ? (
         <p>{formError}</p>
       ) : (
-        <p> Join an existing shopping list by entering a three word token </p>
+        <p>
+          {' '}
+          Join an existing shopping list by entering a valid three word token{' '}
+        </p>
       )}
-      <div>
-        <label htmlFor="share-token">Share Token:</label>
+      <div className="share-token-div">
+        <label className="share-token-input" htmlFor="share-token">
+          Token:
+        </label>
         <input
           id="share-token"
+          // className="share-token-input"
           type="search"
           list="token-list"
           placeholder="three word token"
@@ -37,7 +45,9 @@ const JoinList = ({
             : null}
         </datalist>
       </div>
-      <button onClick={handleClick}>Join an existing list</button>
+      <button className="joinButton" onClick={handleClick}>
+        Join an existing list
+      </button>
     </div>
   );
 };
