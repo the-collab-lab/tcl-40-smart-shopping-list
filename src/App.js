@@ -4,6 +4,8 @@ import './App.css';
 import AddItem from './views/AddItem/AddItem.jsx';
 import List from './views/List/List.jsx';
 import Home from './views/Home/Home.jsx';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 
 function App() {
   const [activeToken, setActiveToken] = useState(
@@ -31,6 +33,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route
           path="/"
@@ -58,6 +61,7 @@ function App() {
           }
         />
       </Routes>
+      {activeToken && <Footer />}
     </BrowserRouter>
   );
 }

@@ -92,7 +92,7 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div className="addItemContainer">
         <span className="userMessage">{error}</span>
         <form onSubmit={handleSubmit} className="addItemForm">

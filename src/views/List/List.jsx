@@ -144,105 +144,104 @@ export default function List({ token }) {
 
   return (
     <section>
-      <div className="div">
-        <Header />
-        {data.length > 1 ? (
-          <label htmlFor="search">
-            Search List:
-            <input
-              title="search your list"
-              aria-label="enter your search term"
-              type="search"
-              name="search"
-              id="search"
-              onChange={filterList}
-              value={searchInput || ''}
-              placeholder="e.g. potatoes"
-            />
-          </label>
-        ) : null}
-        {data.length ? (
-          <ul className="list-container">
-            {searchError ? (
-              <p
-                role="alert"
-                id="search-err"
-                className="search-error"
-                style={{
-                  outline: '3px dashed red',
-                }}
-              >
-                {searchError}
-              </p>
-            ) : null}
-            {copyOfData.map((listItem, index) => {
-              const {
-                name,
-                isActive,
-                frequency,
-                timesPurchased,
-                lastPurchasedAt,
-              } = listItem;
-              let buyIndicator = '';
-              let badge = '';
-              if (
-                timesPurchased === 1 ||
-                ((Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2 &&
-                  lastPurchasedAt !== null)
-              ) {
-                buyIndicator = 'inactive';
-              } else if (frequency < 7) {
-                buyIndicator = 'soon';
-              } else if (frequency >= 7 && frequency <= 30) {
-                buyIndicator = 'kind-of-soon';
-              } else if (frequency > 30) {
-                buyIndicator = 'not-soon';
-              }
-              badge = buyIndicator.replace('-', ' ');
-              return (
-                <li key={index} className={buyIndicator}>
-                  {' '}
-                  <input
-                    className="checkbox"
-                    aria-invalid={toggleErr}
-                    aria-describedby="search-err"
-                    aria-errormessage="search-err"
-                    onChange={() => onChange(listItem)}
-                    checked={isActive}
-                    type="checkbox"
-                    id={name}
-                    name={listItem.id}
-                  />{' '}
-                  <label htmlFor={name}>{name}</label>
-                  <label htmlFor={name}>
-                    <small className="badge">
-                      <strong>{badge}</strong>
-                    </small>
-                  </label>
-                  <button
-                    className="delete-button"
-                    onClick={() => deleteItem(listItem)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <>
-            {/* <h1>Smart Shopping List</h1>
+      {/* <div className="div"> */}
+      {/* <Header /> */}
+      {data.length > 1 ? (
+        <label htmlFor="search">
+          Search List:
+          <input
+            title="search your list"
+            aria-label="enter your search term"
+            type="search"
+            name="search"
+            id="search"
+            onChange={filterList}
+            value={searchInput || ''}
+            placeholder="e.g. potatoes"
+          />
+        </label>
+      ) : null}
+      {data.length ? (
+        <ul className="list-container">
+          {searchError ? (
+            <p
+              role="alert"
+              id="search-err"
+              className="search-error"
+              style={{
+                outline: '3px dashed red',
+              }}
+            >
+              {searchError}
+            </p>
+          ) : null}
+          {copyOfData.map((listItem, index) => {
+            const {
+              name,
+              isActive,
+              frequency,
+              timesPurchased,
+              lastPurchasedAt,
+            } = listItem;
+            let buyIndicator = '';
+            let badge = '';
+            if (
+              timesPurchased === 1 ||
+              ((Date.now() - lastPurchasedAt) / 86400000 >= frequency * 2 &&
+                lastPurchasedAt !== null)
+            ) {
+              buyIndicator = 'inactive';
+            } else if (frequency < 7) {
+              buyIndicator = 'soon';
+            } else if (frequency >= 7 && frequency <= 30) {
+              buyIndicator = 'kind-of-soon';
+            } else if (frequency > 30) {
+              buyIndicator = 'not-soon';
+            }
+            badge = buyIndicator.replace('-', ' ');
+            return (
+              <li key={index} className={buyIndicator}>
+                {' '}
+                <input
+                  className="checkbox"
+                  aria-invalid={toggleErr}
+                  aria-describedby="search-err"
+                  aria-errormessage="search-err"
+                  onChange={() => onChange(listItem)}
+                  checked={isActive}
+                  type="checkbox"
+                  id={name}
+                  name={listItem.id}
+                />{' '}
+                <label htmlFor={name}>{name}</label>
+                <label htmlFor={name}>
+                  <small className="badge">
+                    <strong>{badge}</strong>
+                  </small>
+                </label>
+                <button
+                  className="delete-button"
+                  onClick={() => deleteItem(listItem)}
+                >
+                  Delete
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <>
+          {/* <h1>Smart Shopping List</h1>
             <div className="icons">
               <SiProbot className="icon" />
             </div> */}
-            <p className="message">Your list is empty. Please add something.</p>
-            <Link to="/additem" className="btn add-btn">
-              Add Item
-            </Link>
-          </>
-        )}
-      </div>
-      <Footer />
+          <p className="message">Your list is empty. Please add something.</p>
+          <Link to="/additem" className="btn add-btn">
+            Add Item
+          </Link>
+        </>
+      )}
+      {/* <Footer /> */}
     </section>
   );
 }

@@ -55,7 +55,7 @@ const Home = ({
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <CreateList newToken={handleCreateToken} />
       <JoinList
         token={activeToken}
@@ -64,7 +64,7 @@ const Home = ({
         formError={formError}
         tokenList={tokenList}
       />
-      <div>{activeToken ? <Footer /> : null}</div>
+      {/* <div>{activeToken ? <Footer /> : null}</div> */}
     </div>
   );
 };
