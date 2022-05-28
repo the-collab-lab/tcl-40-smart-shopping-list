@@ -7,6 +7,7 @@ import CreateList from '../../components/Home/CreateList';
 import JoinList from '../../components/Home/JoinList';
 import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
+import '../../App.css';
 
 const Home = ({
   activeToken,
@@ -54,18 +55,20 @@ const Home = ({
   };
 
   return (
-    <div>
-      <Header />
-      <CreateList newToken={handleCreateToken} />
-      <JoinList
-        token={activeToken}
-        handleClick={handleJoinList}
-        handleChange={handleChange}
-        formError={formError}
-        tokenList={tokenList}
-      />
-      <div>{activeToken ? <Footer /> : null}</div>
-    </div>
+    <section>
+      <div className="div">
+        <Header />
+        <CreateList newToken={handleCreateToken} />
+        <JoinList
+          token={activeToken}
+          handleClick={handleJoinList}
+          handleChange={handleChange}
+          formError={formError}
+          tokenList={tokenList}
+        />
+        <div>{activeToken ? <Footer /> : null}</div>
+      </div>
+    </section>
   );
 };
 
