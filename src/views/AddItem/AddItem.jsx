@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc, onSnapshot } from 'firebase/firestore';
 import Footer from '../../components/Footer/Footer';
+import '../../App.css';
+import './AddItem.css';
 import Header from '../../components/Header/Header';
 
 const INITIAL_STATE = {
@@ -91,9 +93,12 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
   return (
     <div>
       <Header />
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Item Name</label>
+      <div className="addItemContainer">
+        <span className="userMessage">{error}</span>
+        <form onSubmit={handleSubmit} className="addItemForm">
+          <label htmlFor="name">
+            <strong>Item Name</strong>
+          </label>
           <input
             type="text"
             id="name"
@@ -101,38 +106,53 @@ export default function AddItem({ token, addTokenToLocalStorage, tokenList }) {
             value={name}
             name="name"
           />
-          <span>{error}</span>
-          <fieldset>
-            <legend>Frequency</legend>
-            <label htmlFor="7">Soon</label>
-            <input
-              type="radio"
-              name="frequency"
-              value="7"
-              id="7"
-              checked={frequency === '7'}
-              onChange={handleInput}
-            />
-            <label htmlFor="14">Kind of Soon</label>
-            <input
-              type="radio"
-              name="frequency"
-              value="14"
-              id="14"
-              checked={frequency === '14'}
-              onChange={handleInput}
-            />
-            <label htmlFor="30">Not Soon</label>
-            <input
-              type="radio"
-              name="frequency"
-              value="30"
-              id="30"
-              checked={frequency === '30'}
-              onChange={handleInput}
-            />
+
+          <fieldset className="freqContainer">
+            <legend>
+              <strong>
+                How soon will you need to purchase this item again?
+              </strong>
+            </legend>
+            <label className="freqLabel" htmlFor="7">
+              <input
+                className="freqInput"
+                type="radio"
+                name="frequency"
+                value="7"
+                id="7"
+                checked={frequency === '7'}
+                onChange={handleInput}
+              />
+              Soon
+            </label>
+            <label className="freqLabel" htmlFor="14">
+              <input
+                className="freqInput"
+                type="radio"
+                name="frequency"
+                value="14"
+                id="14"
+                checked={frequency === '14'}
+                onChange={handleInput}
+              />
+              Kind of Soon
+            </label>
+            <label className="freqLabel" htmlFor="30">
+              <input
+                className="freqInput"
+                type="radio"
+                name="frequency"
+                value="30"
+                id="30"
+                checked={frequency === '30'}
+                onChange={handleInput}
+              />
+              Not soon
+            </label>
           </fieldset>
-          <button type="submit">Add Item</button>
+          <button type="submit" className="addButton btn">
+            Add to List
+          </button>
         </form>
         <Footer />
       </div>

@@ -1,0 +1,64 @@
+.addItemContainer {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: var(--fontBody);
+  color: var(--darkpurple);
+  /* outline: 10px solid red; */
+}
+
+input {
+  padding: 0.25rem;
+}
+
+.addItemForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 5rem;
+  /* width: 30vw; */
+}
+
+.freqContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  border: 0;
+  margin-top: 1.5em;
+}
+
+.freqContainer legend,
+label {
+  margin-bottom: 0.5em;
+}
+
+.freqLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 6em;
+}
+
+.freqInput:checked {
+  accent-color: var(--orange);
+}
+
+.userMessage {
+  color: var(--teal);
+  font-weight: 900;
+  padding: 1em;
+}
+
+.addButton {
+  color: var(--white);
+  border: none;
+  background-color: var(--orange);
+  font-family: var(--fontBody);
+  font-weight: 900;
+}
