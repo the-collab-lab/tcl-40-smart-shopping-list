@@ -14,7 +14,7 @@ This app was developed by a group of four junior developers through [The Collab 
 
 ## Demos of the app:
 
-Screenshots or gifs of the final product will eventually go here
+![Animation](https://user-images.githubusercontent.com/80491609/171272609-6fc1c5a2-a8e8-4221-81ba-083180ff50f1.gif)
 
 # Technologies
 
