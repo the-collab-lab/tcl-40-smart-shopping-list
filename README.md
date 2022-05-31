@@ -12,7 +12,7 @@ This app was developed by a group of four junior developers through [The Collab 
 - One user can have multiple sets of lists and each list is attached to a token. A token is generated every time a user creates a new list.
 - Users are allowed to join other peoples' lists as long as they have the token to another user's list.
 
-## Demos of the app:
+## Demo of the app:
 
 ![Animation](https://user-images.githubusercontent.com/80491609/171272609-6fc1c5a2-a8e8-4221-81ba-083180ff50f1.gif)
 
