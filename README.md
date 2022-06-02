@@ -4,7 +4,7 @@
 
 This app was developed by a group of four junior developers through [The Collab Lab](https://the-collab-lab.codes/). It's a smart shopping app that learns a user's buying habits and helps them remember what they need to buy on their next trip to the store.
 
-[Live Link](https://tcl-40-smart-shopping-list.web.app/)
+[Live Link](https://tcl-40-smart-shopping-li-23b8c.web.app/)
 
 ## How does it work?
 
