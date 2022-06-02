@@ -11,10 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install && npm run build
+      - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TCL_40_SMART_SHOPPING_LIST }}'
+          firebaseServiceAccount: >-
+            ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TCL_40_SMART_SHOPPING_LI_23B8C
+            }}
           channelId: live
-          projectId: tcl-40-smart-shopping-list
+          projectId: tcl-40-smart-shopping-li-23b8c
