@@ -56,5 +56,8 @@
       "prettier --write"
     ],
     "*.{css,md}": "prettier --write"
+  },
+  "overrides": {
+    "@svgr/webpack": "^6.2.1"
   }
 }
