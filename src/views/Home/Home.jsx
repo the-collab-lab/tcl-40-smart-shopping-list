@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getToken } from '@the-collab-lab/shopping-list-utils';
+import { generateToken } from '@the-collab-lab/shopping-list-utils';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../lib/firebase';
 import { collection, getDocs, query } from 'firebase/firestore';
@@ -25,7 +25,7 @@ const Home = ({
   };
 
   const handleCreateToken = () => {
-    const newToken = getToken();
+    const newToken = generateToken();
     setActiveToken(newToken);
     localStorage.setItem('token', newToken);
     navigate('/additem');

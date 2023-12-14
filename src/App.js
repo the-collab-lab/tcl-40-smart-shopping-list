@@ -4,6 +4,7 @@ import './App.css';
 import AddItem from './views/AddItem/AddItem.jsx';
 import List from './views/List/List.jsx';
 import Home from './views/Home/Home.jsx';
+import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 function App() {
   const [activeToken, setActiveToken] = useState(
@@ -35,12 +36,15 @@ function App() {
         <Route
           path="/"
           element={
-            <Home
-              activeToken={activeToken}
-              setActiveToken={setActiveToken}
-              tokenList={tokenList}
-              addTokenToLocalStorage={addTokenToLocalStorage}
-            />
+            <>
+              <ArchivalNoticeModal />
+              <Home
+                activeToken={activeToken}
+                setActiveToken={setActiveToken}
+                tokenList={tokenList}
+                addTokenToLocalStorage={addTokenToLocalStorage}
+              />
+            </>
           }
         />
         <Route
